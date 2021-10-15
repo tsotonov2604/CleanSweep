@@ -1,6 +1,6 @@
 package move;
 
-public class Tile {
+public class Tile implements IMoveHelper {
 
     String data; // will be changed to enums or make other subclasses
     private int dirt;
@@ -57,5 +57,33 @@ public class Tile {
 
     public void setLeft(Tile left) {
         this.left = left;
+    }
+
+    @Override
+    public Tile moveUp() {
+        this.getUp().setDirt(0);
+        this.setDirt(1);
+        return this.getUp();
+    }
+
+    @Override
+    public Tile moveDown() {
+        this.getDown().setDirt(0);
+        this.setDirt(1);
+        return this.getDown();
+    }
+
+    @Override
+    public Tile moveLeft() {
+        this.getLeft().setDirt(0);
+        this.setDirt(1);
+        return this.getLeft();
+    }
+
+    @Override
+    public Tile moveRight() {
+        this.getRight().setDirt(0);
+        this.setDirt(1);
+        return this.getRight();
     }
 }

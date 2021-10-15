@@ -3,6 +3,7 @@ package move;
 public class Grid {
 
     private Tile gridHead;
+    private Tile sweep;
 
     public Grid(int size) { // right now only works with squares
 
@@ -52,6 +53,24 @@ public class Grid {
             temp = currentRow.getDown();
             currentRow = temp;
         }
+    }
+
+    public Tile addSweep(int x,int y) {
+
+        Tile currentNode = gridHead;
+
+        for(int i=0;i<x;i++) {
+            currentNode = currentNode.getRight();
+        }
+        for(int i=0;i<y;i++) {
+            currentNode = currentNode.getDown();
+        }
+
+        currentNode.setData("Sweep");
+        currentNode.setDirt(0);
+        printGrid();
+        sweep = currentNode;
+        return sweep;
     }
 
 }
