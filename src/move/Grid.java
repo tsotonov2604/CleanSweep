@@ -8,13 +8,30 @@ public class Grid {
 
         gridHead = new Tile("Floor",1);
         Tile column = gridHead;
+        Tile row = gridHead;
 
-        for(int i=0;i<size-1;i++){
-            Tile temp = new Tile("Floor",1);
-            column.setRight(temp);
-            temp.setLeft(column);
-            column = temp;
+        for(int i=0;i<size-1;i++){ // got rid of the temp pointer more efficient like that
 
+            column.setRight(new Tile("Floor",1));
+            column.getRight().setLeft(column);
+            column = column.getRight();
+
+        }
+
+        for( int i =0;i<size-1;i++) { // no need for a temp pointer since all has links
+            row.setDown(new Tile("Floor",1));
+            row.getDown().setUp(row);
+            row = row.getDown();
+            column = row;
+
+            for(int j=0;j<size-1;j++) {
+
+                column.setRight(new Tile("Floor",1));
+                column.getRight().setLeft(column);
+                column.getRight().setUp(column.getUp().getRight());
+                column.getRight().getUp().setDown(column.getRight());
+                column = column.getRight();
+            }
         }
 
 
