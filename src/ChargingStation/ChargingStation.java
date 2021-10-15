@@ -3,7 +3,7 @@ package ChargingStation;
 //import floor plan grid
 //import battery info  
 
-public class ChargingStation implements IChargingStation {
+public class ChargingStation  {
 
     //private List<Grid Type> CHARGING_STATION_LOCATION; 
     //public List<Grid Type> currentLocation;
@@ -32,6 +32,7 @@ public class ChargingStation implements IChargingStation {
    public void getCurrentLocation(){
        //return get the current location of the clean sweep from grid
    }
+
 
    public void charge(){
        //currentCharge= MAX_BATTERY_CAPACITY
