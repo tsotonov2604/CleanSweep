@@ -21,7 +21,12 @@ public class ChargingStation  {
    }
 
    public void navigateToChargingStation(){
-        //currentLocation = getChargingStationLocation()       
+        //currentLocation = getChargingStationLocation();
+        //currentCharge = getBatteryPercentage();
+        int currentCharge = 100;  //assuming it always has a full charge
+        
+
+
    }
 
    public void setCurrentLocation(){
