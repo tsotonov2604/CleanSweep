@@ -5,16 +5,11 @@ import move.Tile;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
 import battery.Battery;
-import ChargingStation.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
 import DirtCapacity.DirtSensor;
 import DirtCapacity.DirtCapacityOfSweeper;
-
-import java.awt.Point;
-
 
 public class Main {
     public static void main(String[] args) throws Exception {
