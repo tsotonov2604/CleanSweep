@@ -17,4 +17,6 @@ public class Battery {
              System.out.println("Low Battery Warning: " + CurrentBatteryPercent + "%");
         }
     }
+
+
 }
