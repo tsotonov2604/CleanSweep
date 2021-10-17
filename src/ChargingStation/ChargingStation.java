@@ -1,41 +1,70 @@
 package ChargingStation;
-
-//import floor plan grid
-//import battery info  
+import move.Grid;
+import battery.Battery;
+import java.awt.Point;
+import move.Tile;
 
 public class ChargingStation  {
 
-    //private List<Grid Type> CHARGING_STATION_LOCATION; 
-    //public List<Grid Type> currentLocation;
-    //private MAX_BATTERY_CAPACITY = 100;
-    //public int currentCharge = battery info from import; 
-   
+    private Point currentLocation = new Point(0,0);
+    private Battery battery = new Battery();
+    private double MAX_BATTERY_CAPACITY = 100;
+    private Point CHARGING_STATION_LOCATION;
 
-   public void setChargingStationLocation(){
-       //set initial coordinates of charging station based on floor plan grid
+   public void setChargingStationLocation(Grid grid){
+        //set initial coordinates of charging station based on floor plan grid - HARDCODED @ POINT 0,0
        //CHARGING_STATION_LOCATION  = initial location; 
+        grid.addSweep(0, 0);
+        CHARGING_STATION_LOCATION = new Point(0,0); 
    }
 
-   public void getChargingStationLocation(){
-       //return setChargingStationLocation();      
+   public Point getChargingStationLocation(){   
+       System.out.println("Charging station is located at point: " + CHARGING_STATION_LOCATION.toString());
+       return CHARGING_STATION_LOCATION;
+
    }
 
-   public void navigateToChargingStation(){
-        //currentLocation = getChargingStationLocation()       
+   public Point navigateToChargingStation(Grid grid, Tile sweep){
+       //set the current location to the location of the charging station
+        currentLocation = getChargingStationLocation();
+        System.out.println("Navigating to charging station...");
+        System.out.println("------------Moving Left--------");
+        sweep = sweep.moveLeft();
+        grid.printGrid();
+        System.out.println("---------Moving Up-----------");
+        sweep = sweep.moveUp();
+        grid.printGrid();
+        System.out.println("------------Moving Left--------");
+        sweep = sweep.moveLeft();
+        grid.printGrid();
+        System.out.println("---------Moving Up-----------");
+        sweep = sweep.moveUp();
+        grid.printGrid();
+        System.out.println("------------Moving Left--------");
+        sweep = sweep.moveLeft();
+        grid.printGrid();
+        System.out.println("---------Moving Up-----------");
+        sweep = sweep.moveUp();
+        grid.printGrid();
+        System.out.println("Made it to the charging station!");
+        return currentLocation;       
    }
 
-   public void setCurrentLocation(){
-       //get the current location of the clean sweep from grid
-       //current location= current x,y coordinates from grid 
+   public void setCurrentLocation(int x, int y){
+        //get the current location of the clean sweep from grid and sets it as the current location 
+        currentLocation.x = x;
+        currentLocation.y = y; 
+        //grid.removeSweep(currentLocation.x, currentLocation.y);   set current location of sweep to that of charger i.e 3,3 = 1 
    }
   
-   public void getCurrentLocation(){
-       //return get the current location of the clean sweep from grid
+   public Point getCurrentLocation(){
+       return currentLocation;
    }
 
 
    public void charge(){
-       //currentCharge= MAX_BATTERY_CAPACITY
-       System.out.println("Charging!");
+       System.out.println("Charging...");
+       battery.setCurrentBatteryPercent(MAX_BATTERY_CAPACITY);
+       System.out.println("Battery is at 100%!");
    }
 }
