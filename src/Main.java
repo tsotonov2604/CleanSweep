@@ -64,7 +64,7 @@ public class Main {
         System.out.println("------------CHARGING STATION------------");
         ChargingStation cs = new ChargingStation();
         cs.setCurrentLocation(grid.getX(),grid.getY()); //current location of Sweep as set in grid addSweep 3,3
-        System.out.println(cs.getCurrentLocation());
+        System.out.println("Sweep is located at point: " + cs.getCurrentLocation());
         cs.setChargingStationLocation(grid); //sets the location of the charging station on the Grid -i.e position 0,0
         if(battery.LowBattery()){
             cs.navigateToChargingStation(grid,sweep);
