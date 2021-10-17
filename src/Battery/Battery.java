@@ -1,6 +1,6 @@
 package Battery;
 
-public class Battery {
+public class BatteryP {
 
     private double CurrentBatteryPercent;
     private double LowBatteryPercent = 20;
