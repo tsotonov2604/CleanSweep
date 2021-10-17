@@ -4,13 +4,15 @@ public class Grid {
 
     private Tile gridHead;
     private Tile sweep;
+    private int x;
+    private int y;
 
     public Grid(int size) { // right now only works with squares
 
         gridHead = new Tile("Floor",1);
         Tile column = gridHead;
         Tile row = gridHead;
-
+       
         for(int i=0;i<size-1;i++){ // got rid of the temp pointer more efficient like that
 
             column.setRight(new Tile("Floor",1));
@@ -56,7 +58,7 @@ public class Grid {
     }
 
     public Tile addSweep(int x,int y) {
-
+               
         Tile currentNode = gridHead;
 
         for(int i=0;i<x;i++) {
@@ -70,7 +72,46 @@ public class Grid {
         currentNode.setDirt(0);
         printGrid();
         sweep = currentNode;
+        setX(x);
+        setY(y);
         return sweep;
+    }
+
+    public Tile removeSweep(int x,int y) {
+               
+        Tile currentNode = gridHead;
+
+        for(int i=0;i<x;i++) {
+            currentNode = currentNode.getRight();
+        }
+        for(int i=0;i<y;i++) {
+            currentNode = currentNode.getDown();
+        }
+
+        currentNode.setData("Sweep");
+        currentNode.setDirt(1);
+        printGrid();
+        sweep = currentNode;
+        setX(x);
+        setY(y);
+        return sweep;
+    }
+
+    
+    public int getX() {
+        return this.x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
 }

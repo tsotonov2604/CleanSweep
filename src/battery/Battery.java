@@ -2,20 +2,24 @@ package battery;
 
 public class Battery {
 
-    private double CurrentBatteryPercent;
+    public double CurrentBatteryPercent;
     private double LowBatteryPercent = 20;
 
-    public double GetBatteryPercent() {
-
-        return CurrentBatteryPercent;
-
+    public double getCurrentBatteryPercent() {
+        return this.CurrentBatteryPercent;
     }
 
-    public void LowBattery() {
+    public void setCurrentBatteryPercent(double CurrentBatteryPercent) {
+        this.CurrentBatteryPercent = CurrentBatteryPercent;
+    }
+
+    
+    public boolean LowBattery() {
 
         if (CurrentBatteryPercent <= LowBatteryPercent) {
             System.out.println("Low Battery Warning: " + CurrentBatteryPercent + "%");
         }
+        return true;
     }
 
 

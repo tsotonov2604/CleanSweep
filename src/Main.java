@@ -5,7 +5,6 @@ import move.Tile;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
 import battery.Battery;
-
 import ChargingStation.*;
 import javax.swing.*;
 import java.awt.*;
@@ -14,13 +13,12 @@ import java.util.ArrayList;
 import DirtCapacity.DirtSensor;
 import DirtCapacity.DirtCapacityOfSweeper;
 
+import java.awt.Point;
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-        ChargingStation cs = new ChargingStation();
-        cs.charge();
-
+       
         //OnOffButton
         OnOffButton OnOff = new OnOffButton();
         OnOff.setTitle("Turning a device On/Off");
@@ -41,7 +39,7 @@ public class Main {
         war.EmptyBag();
       
       
-      // Movement
+      // Movement   
         Grid grid = new Grid(10);
         grid.printGrid();
         System.out.println("------------Adding Sweep--------");
@@ -60,11 +58,24 @@ public class Main {
         System.out.println("------------Moving Left--------");
         sweep = sweep.moveLeft();
         grid.printGrid();
-        
+
+     
         System.out.println("BATTERY");
 
-        Battery b = new Battery();
-        System.out.println(b.GetBatteryPercent()+" Battery Percentage");
+        Battery battery = new Battery();
+        battery.CurrentBatteryPercent = 10;
+        System.out.println(battery.getCurrentBatteryPercent()+" Battery Percentage");
+
+        System.out.println("------------CHARGING STATION------------");
+        ChargingStation cs = new ChargingStation();
+        cs.setCurrentLocation(grid.getX(),grid.getY()); //current location of Sweep as set in grid addSweep 3,3
+        System.out.println(cs.getCurrentLocation());
+        cs.setChargingStationLocation(grid); //sets the location of the charging station on the Grid -i.e position 0,0
+        if(battery.LowBattery()){
+            cs.navigateToChargingStation(grid,sweep);
+            cs.charge();
+            grid.printGrid();
+        }
 
         System.out.println("Shortest path");
         Vertex A = new Vertex("A");
