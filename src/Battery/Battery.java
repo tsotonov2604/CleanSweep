@@ -8,6 +8,8 @@ public class Battery {
 
     public double GetBatteryPercent;{
 
+
+
         return CurrentBatteryPercent;
 
     }
