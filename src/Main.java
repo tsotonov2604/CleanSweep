@@ -4,6 +4,8 @@ import move.Grid;
 import move.Tile;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
+import battery.Battery;
+
 import javax.swing.*;
 import java.awt.*;
 import DirtCapacity.DirtSensor;
@@ -37,20 +39,26 @@ public class Main {
       
       
       // Movement
-       Grid grid = new Grid(10);
+        Grid grid = new Grid(10);
         grid.printGrid();
         System.out.println("------------Adding Sweep--------");
         Tile sweep = grid.addSweep(3, 3);
         System.out.println("---------Moving Up-----------");
         sweep = sweep.moveUp();
         grid.printGrid();
+       // Thread.sleep(1000);
         System.out.println("----------Moving Right----------");
         sweep = sweep.moveRight();
         grid.printGrid();
+        //Thread.sleep(1000);
         System.out.println("------------Moving Down--------");
         sweep = sweep.moveDown();
         grid.printGrid();
+        
+        System.out.println("BATTERY");
 
+        Battery b = new Battery();
+        System.out.println(b.GetBatteryPercent()+" Battery Percentage");
 
     }
 }
