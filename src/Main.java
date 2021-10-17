@@ -6,8 +6,11 @@ import ChargingStation.ChargingStation;
 import Power.OnOffButton;
 import battery.Battery;
 
+import ChargingStation.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
 import DirtCapacity.DirtSensor;
 import DirtCapacity.DirtCapacityOfSweeper;
 
@@ -54,11 +57,46 @@ public class Main {
         System.out.println("------------Moving Down--------");
         sweep = sweep.moveDown();
         grid.printGrid();
+        System.out.println("------------Moving Left--------");
+        sweep = sweep.moveLeft();
+        grid.printGrid();
         
         System.out.println("BATTERY");
 
         Battery b = new Battery();
         System.out.println(b.GetBatteryPercent()+" Battery Percentage");
+
+        System.out.println("Shortest path");
+        Vertex A = new Vertex("A");
+        Vertex B = new Vertex("B");
+        Vertex C = new Vertex("C");
+        Vertex D = new Vertex("D");
+        Vertex E = new Vertex("E");
+        Vertex F = new Vertex("F");
+        Vertex G = new Vertex("G");
+        Vertex H = new Vertex("H");
+        Vertex I = new Vertex("I");
+
+        A.adjacencies = new Edge[]{ new Edge(B, 1) ,new Edge(D, 1) };
+        B.adjacencies = new Edge[]{ new Edge(A, 1), new Edge(E,1),new Edge(C,1)};
+        C.adjacencies = new Edge[]{ new Edge(B, 1),new Edge(F, 1)   };
+        D.adjacencies = new Edge[]{ new Edge(A, 1),new Edge(E, 1),new Edge(G, 1)   };
+        E.adjacencies = new Edge[]{ new Edge(B, 1),new Edge(D, 1),new Edge(F, 1),new Edge(H, 1) };
+        F.adjacencies = new Edge[]{ new Edge(C, 1),new Edge(E, 1),new Edge(I, 1)  };
+        G.adjacencies = new Edge[]{ new Edge(D, 1),new Edge(H, 1)  };
+        H.adjacencies = new Edge[]{ new Edge(G, 1),new Edge(E, 1),new Edge(I, 1) };
+        I.adjacencies = new Edge[]{ new Edge(F, 1),new Edge(H, 1) };
+        ShortestPath shortestPath = new ShortestPath();
+        shortestPath.computePaths(A);
+        double minI = I.minDistance;
+        double currentCharge = 100;
+        if(minI == currentCharge){
+            ArrayList<Vertex> path = (ArrayList<Vertex>) shortestPath.getShortestPathTo(I);
+            System.out.println("Path: " + path);
+        }else{
+            ArrayList<Vertex> path = (ArrayList<Vertex>)  shortestPath.getShortestPathTo(I);
+            System.out.println("Path: " + path);
+        }
 
     }
 }
