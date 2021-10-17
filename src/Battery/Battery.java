@@ -7,6 +7,7 @@ public class Battery {
 
 
     public double GetBatteryPercent;{
+    public double GetBatteryPercent(){
 
         return CurrentBatteryPercent;
 
@@ -17,6 +18,7 @@ public class Battery {
 
         if (CurrentBatteryPercent <= LowBatteryPercent) {
             System.out.println("Low Battery Warning: " + CurrentBatteryPercent);
+             System.out.println("Low Battery Warning: " + CurrentBatteryPercent + "%");
         }
     }
 }
