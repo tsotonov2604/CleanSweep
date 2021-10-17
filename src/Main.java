@@ -57,6 +57,9 @@ public class Main {
         System.out.println("------------Moving Down--------");
         sweep = sweep.moveDown();
         grid.printGrid();
+        System.out.println("------------Moving Left--------");
+        sweep = sweep.moveLeft();
+        grid.printGrid();
         
         System.out.println("BATTERY");
 
