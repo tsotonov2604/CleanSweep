@@ -1,3 +1,7 @@
+
+import ChargingStation.*;
+import move.Grid;
+import move.Tile;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
 import javax.swing.*;
@@ -30,6 +34,22 @@ public class Main {
         DirtSensor war= new DirtSensor();
         war.FullBag();
         war.EmptyBag();
+      
+      
+      // Movement
+       Grid grid = new Grid(10);
+        grid.printGrid();
+        System.out.println("------------Adding Sweep--------");
+        Tile sweep = grid.addSweep(3, 3);
+        System.out.println("---------Moving Up-----------");
+        sweep = sweep.moveUp();
+        grid.printGrid();
+        System.out.println("----------Moving Right----------");
+        sweep = sweep.moveRight();
+        grid.printGrid();
+        System.out.println("------------Moving Down--------");
+        sweep = sweep.moveDown();
+        grid.printGrid();
 
 
     }
