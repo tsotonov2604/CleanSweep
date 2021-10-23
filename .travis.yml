@@ -8,7 +8,7 @@ notifications:
       - saleh.mk96@gmail.com
       - j.salemi93@gmail.com
       - salangar@depaul.edu
-      - j.salemi93@gmail.com
-      - saleh.mk96@gmail.com
+      - faheel.u@gmail.com
+      - tsotonov@depaul.edu
     on_success: always 
     on_failure: always 
