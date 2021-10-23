@@ -27,26 +27,6 @@ public class ChargingStation  {
    public Point navigateToChargingStation(Grid grid, Tile sweep){
        //set the current location to the location of the charging station
         currentLocation = getChargingStationLocation();
-        System.out.println("Navigating to charging station...");
-        System.out.println("------------Moving Left--------");
-        sweep = sweep.moveLeft();
-        grid.printGrid();
-        System.out.println("---------Moving Up-----------");
-        sweep = sweep.moveUp();
-        grid.printGrid();
-        System.out.println("------------Moving Left--------");
-        sweep = sweep.moveLeft();
-        grid.printGrid();
-        System.out.println("---------Moving Up-----------");
-        sweep = sweep.moveUp();
-        grid.printGrid();
-        System.out.println("------------Moving Left--------");
-        sweep = sweep.moveLeft();
-        grid.printGrid();
-        System.out.println("---------Moving Up-----------");
-        sweep = sweep.moveUp();
-        grid.printGrid();
-        System.out.println("Made it to the charging station!");
         return currentLocation;       
    }
 
