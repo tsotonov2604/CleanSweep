@@ -7,13 +7,13 @@ public class Grid {
     private int x;
     private int y;
 
-    public Grid(int size) { // right now only works with squares
+    public Grid(int[][] size) { // right now only works with squares
 
         gridHead = new Tile("Floor",1);
         Tile column = gridHead;
         Tile row = gridHead;
        
-        for(int i=0;i<size-1;i++){ // got rid of the temp pointer more efficient like that
+        for(int i=0;i<size[0].length;i++){ // got rid of the temp pointer more efficient like that
 
             column.setRight(new Tile("Floor",1));
             column.getRight().setLeft(column);
@@ -21,13 +21,13 @@ public class Grid {
 
         }
 
-        for( int i =0;i<size-1;i++) { // no need for a temp pointer since all has links
+        for( int i =0;i<size[0].length;i++) { // no need for a temp pointer since all has links
             row.setDown(new Tile("Floor",1));
             row.getDown().setUp(row);
             row = row.getDown();
             column = row;
 
-            for(int j=0;j<size-1;j++) {
+            for(int j=0;j<size[0].length;j++) {
 
                 column.setRight(new Tile("Floor",1));
                 column.getRight().setLeft(column);
