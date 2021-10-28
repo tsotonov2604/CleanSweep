@@ -2,7 +2,7 @@ package battery;
 
 public class Battery {
 
-    private double CurrentBatteryPercent;
+    private double CurrentBatteryPercent=100.0;
     private double LowBatteryPercent = 20;
 
     public double GetBatteryPercent() {
@@ -13,9 +13,14 @@ public class Battery {
 
     public void LowBattery() {
 
+
         if (CurrentBatteryPercent <= LowBatteryPercent) {
             System.out.println("Low Battery Warning: " + CurrentBatteryPercent + "%");
         }
+    }
+
+    public void decreaseBattery(double i){
+        CurrentBatteryPercent -= i;
     }
 
 
