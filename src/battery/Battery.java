@@ -48,5 +48,6 @@ public class Battery {
             CurrentBatteryPercent-=2; //uses 2 units of power
         else if(floorType == FloorType.HighPile) //high-pile carpet
             CurrentBatteryPercent-=3; //uses 3 units of power
+
     }
 }
