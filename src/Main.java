@@ -2,17 +2,38 @@
 import ChargingStation.*;
 import move.Grid;
 import move.Tile;
+import schedule.Schedule;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
 import battery.Battery;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import DirtCapacity.DirtSensor;
 import DirtCapacity.DirtCapacityOfSweeper;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+
+        //schedule
+        JLabel label = new JLabel("Selected Date:");
+		final JTextField text = new JTextField(20);
+		JButton b = new JButton("popup");
+		JPanel p = new JPanel();
+		p.add(label);
+		p.add(text);
+		p.add(b);
+		JFrame f = new JFrame();
+		f.getContentPane().add(p);
+		f.pack();
+		f.setVisible(true);
+		b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				text.setText(new Schedule(f).setPickedDate());
+			}
+		});
+        
        
         //OnOffButton
         OnOffButton OnOff = new OnOffButton();
