@@ -11,6 +11,7 @@ public class Grid {
     private Tile gridHead;
     private Tile sweep;
     private Tile currentTile;
+    //private Sweep sweep;
     private int xAxis,yAxis, maxAxis = 0;
     private ArrayList<Tile> rowsHeads = new ArrayList<>();
     private static Battery battery = new Battery();
@@ -31,7 +32,6 @@ public class Grid {
         for(int i=0;i<size-1;i++){ // got rid of the temp pointer more efficient like that
             Tile newTile = new Tile("Floor",1,rowIndex, colIndex);
             column.setRight(newTile);
-            //column.edges.add(new Edge(newTile.getVertex(), 1.0));
             column.getRight().setLeft(column);
             column = column.getRight();
             colIndex++;
@@ -52,7 +52,6 @@ public class Grid {
 
                 Tile newTilee = new Tile("Floor", 1, rowIndex, colIndex);
                 column.setRight(newTilee);
-                //column.edges.add(new Edge(newTilee.getVertex(),1.0));
                 column.getRight().setLeft(column);
                 column.getRight().setUp(column.getUp().getRight());
                 column.getRight().getUp().setDown(column.getRight());
@@ -216,35 +215,24 @@ public class Grid {
 
     }
 
-    public static void clean(Tile sweep , ArrayList<Vertex> path){
+    public static void clean(Sweep sweep , ArrayList<Vertex> path){
 
-        Grid pGrid = sweep.getParentGrid();
+
         try {
-            ArrayList<Tile> tilePath = convertPath(path, sweep.getParentGrid());
-            ArrayList<Tile> toClean = new ArrayList<>();
+            ArrayList<Tile> tilePath = convertPath(path, sweep.getpGrid());
             System.out.println(tilePath);
-            toClean.addAll(tilePath);
             for (Tile t : tilePath) {
                 System.out.println("Moving to "+t.getX()+" : "+t.getY());
-                if(sweep == null){
-                    System.out.println("SWEEP IS NULL");
-                }
-                sweep = sweep.moveTo(t.getX(), t.getY());
+                sweep.moveTo(t.getX(), t.getY());
                 System.out.println("Sweep At "+sweep.getX()+" "+sweep.getY());
-                Grid.battery.decreaseBattery(t.getDirt());
             }
-            pGrid.printClean();
+            sweep.pGrid.printClean();
             System.out.println("Battery after cleaning...");
-            System.out.println(Grid.battery.GetBatteryPercent());
+            System.out.println(sweep.getBattery().getBatteryPercentage());
         }
         catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
-
 
 
 

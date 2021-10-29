@@ -1,6 +1,7 @@
 
 import ChargingStation.*;
 import move.Grid;
+import move.Sweep;
 import move.Tile;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
@@ -62,9 +63,8 @@ public class Main {
             System.out.println("Path: " + path);
         }
 
-        Tile sweep = grid.addSweep(0,0);
-        sweep.setParentGrid(grid);
-        Grid.clean(sweep,path);
+        Sweep sweepObj = new Sweep(0,0,grid);
+        Grid.clean(sweepObj,path);
 
 //        System.out.println("------------Adding Sweep--------");
 //        Tile sweep = grid.addSweep(0, 0);
