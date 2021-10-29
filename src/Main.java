@@ -18,7 +18,7 @@ public class Main {
 
         //schedule
         JLabel label = new JLabel("Selected Date:");
-		final JTextField text = new JTextField(20);
+		JTextField text = new JTextField(20);
 		JButton b = new JButton("popup");
 		JPanel p = new JPanel();
 		p.add(label);
@@ -33,6 +33,7 @@ public class Main {
 				text.setText(new Schedule(f).setPickedDate());
 			}
 		});
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
        
         //OnOffButton
