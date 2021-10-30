@@ -1,0 +1,14 @@
+language: java
+matrix:
+  - JOB="./gradlew build"
+script: "$JOB"
+notifications:
+  email:
+    recipients:
+      - saleh.mk96@gmail.com
+      - j.salemi93@gmail.com
+      - salangar@depaul.edu
+      - faheel.u@gmail.com
+      - tsotonov@depaul.edu
+    on_success: always 
+    on_failure: always 
