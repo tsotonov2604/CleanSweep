@@ -22,7 +22,6 @@ public class ShortestPath {
                 double distanceThroughU = u.minDistance + weight;
                 if (distanceThroughU < v.minDistance) {
                     vertexQueue.remove(v);
-
                     v.minDistance = distanceThroughU ;
                     v.previous = u;
                     vertexQueue.add(v);
