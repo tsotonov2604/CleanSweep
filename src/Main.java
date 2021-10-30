@@ -52,6 +52,28 @@ public class Main {
         System.out.println("Sweep is located at point: " + cs.getCurrentLocation());
         cs.setChargingStationLocation(grid); //sets the location of the charging station on the Grid -i.e position 0,0
 
+         //OnOffButton
+        OnOffButton OnOff = new OnOffButton();
+        OnOff.setTitle("Turning a device On/Off");
+        OnOff.setLayout(new FlowLayout());
+        OnOff.setJToggleButton();
+        OnOff.setAction();
+        OnOff.setSize(300, 200);
+        OnOff.setVisible(true);
+        OnOff.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //DirtCapacityOfSweeper
+        DirtCapacityOfSweeper info= new DirtCapacityOfSweeper();
+        info.dirtCapacity();
+
+        //DirtSensor
+        DirtSensor war= new DirtSensor();
+        war.FullBag();
+        war.EmptyBag();
+
+        //Battery
+        Battery lowWar= new Battery();
+        lowWar.LowBatteryWar();
+        lowWar.fullBatteryInfo();
     }
 }
