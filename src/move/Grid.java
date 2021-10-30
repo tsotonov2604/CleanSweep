@@ -249,12 +249,13 @@ public class Grid {
     private static  ArrayList<Tile> convertPath(ArrayList<Vertex> path,Grid grid) {
 
         ArrayList<Tile> tPaths = new ArrayList<>();
-        for(Vertex v : path){
-            Tile t = grid.getSpecificTile(v.x,v.y);
+        for (Vertex v : path) {
+            Tile t = grid.getSpecificTile(v.x, v.y);
             tPaths.add(t);
         }
 
         return tPaths;
+    }
 
     public Tile removeSweep(int x,int y) {
                

@@ -10,9 +10,7 @@ public class Battery {
     public double getBatteryPercentage() {
 
         return CurrentBatteryPercent;
-
-    public double CurrentBatteryPercent;
-    private double LowBatteryPercent = 20;
+    }
     private double FullBatteryPercent=250;
 
     public double getCurrentBatteryPercent() {
