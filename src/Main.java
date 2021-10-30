@@ -45,24 +45,6 @@ public class Main {
         Sweep sweepObj = new Sweep(0,0,grid);
         Grid.clean(sweepObj,path);
 
-//        System.out.println("------------Adding Sweep--------");
-//        Tile sweep = grid.addSweep(3, 3);
-//        System.out.println("---------Moving Up-----------");
-//        sweep = sweep.moveUp();
-//        grid.printGrid();
-//       // Thread.sleep(1000);
-//        System.out.println("----------Moving Right----------");
-//        sweep = sweep.moveRight();
-//        grid.printGrid();
-//        //Thread.sleep(1000);
-//        System.out.println("------------Moving Down--------");
-//        sweep = sweep.moveDown();
-//        grid.printGrid();
-//        System.out.println("------------Moving Left--------");
-//        sweep = sweep.moveLeft();
-//        grid.printGrid();
-
-
 
         System.out.println("------------CHARGING STATION------------");
         ChargingStation cs = new ChargingStation();
