@@ -1,10 +1,13 @@
 package GUI;
 import javax.swing.*;
 import java.awt.event.*;
+import move.*;
 
 public class LoginScreen {
 
     JFrame loginScreen;
+    Sweep sweep;
+    JLabel welcomeLabel = new JLabel("<html><span style='color: blue;'>Welcome To The Clean Sweep Portal!</span></html>");
     JLabel userLabel=new JLabel("USERNAME");
     JLabel passwordLabel=new JLabel("PASSWORD");
     JTextField userTextField=new JTextField();
@@ -13,8 +16,9 @@ public class LoginScreen {
     JButton resetButton=new JButton("RESET");
     JCheckBox showPassword=new JCheckBox("Show Password");
 
-    public LoginScreen(JFrame frame){
+    public LoginScreen(JFrame frame, Sweep sweep){
         this.loginScreen = frame;
+        this.sweep = sweep;
     }
     
     public void createLoginScreen(){  
@@ -29,6 +33,7 @@ public class LoginScreen {
 
 
     public void setLoginFieldBounds(){
+        welcomeLabel.setBounds(65,50,250,30);
         userLabel.setBounds(50,150,100,30);
         passwordLabel.setBounds(50,220,100,30);
         userTextField.setBounds(150,150,150,30);
@@ -40,6 +45,7 @@ public class LoginScreen {
     }
 
     public void addComponentsToLoginScreen(){
+        loginScreen.add(welcomeLabel);
         loginScreen.add(userLabel);
         loginScreen.add(passwordLabel);
         loginScreen.add(userTextField);
@@ -52,9 +58,9 @@ public class LoginScreen {
     }
 
     public void goToHomeScreen() {
-        loginScreen.setVisible(false); //end current view
+        loginScreen.setVisible(false); 
         JFrame homeScreenFrame = new JFrame("Clean Sweep Home");
-        HomeScreen homeScreen = new HomeScreen(homeScreenFrame);
+        HomeScreen homeScreen = new HomeScreen(homeScreenFrame, sweep);
         homeScreen.createHomeScreen();
     }
 

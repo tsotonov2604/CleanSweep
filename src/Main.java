@@ -18,12 +18,7 @@ import GUI.LoginScreen;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
-        //GUI
-        JFrame loginScreenFrame = new JFrame("Login");
-        LoginScreen gui = new LoginScreen(loginScreenFrame);
-        gui.createLoginScreen();
-        
+   
         Grid grid = new Grid(10);
         grid.printGrid();
 
@@ -56,6 +51,10 @@ public class Main {
         System.out.println("Sweep is located at point: " + cs.getCurrentLocation());
         cs.setChargingStationLocation(grid); //sets the location of the charging station on the Grid -i.e position 0,0
 
+        //GUI
+        JFrame loginScreenFrame = new JFrame("Login");
+        LoginScreen gui = new LoginScreen(loginScreenFrame, sweepObj );
+        gui.createLoginScreen();
 
     }
 }

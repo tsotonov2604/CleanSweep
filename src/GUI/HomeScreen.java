@@ -1,14 +1,19 @@
 package GUI;
 import javax.swing.*;
 import java.awt.event.*;
+import move.*;
 
 public class HomeScreen {
 
     JFrame homeScreen;
+    Sweep sweep;
     JButton powerButton = new JButton("ON");
+    JLabel batteryLabel=new JLabel("BATTERY PERCENTAGE:");
+    JLabel batteryStatus = new JLabel("");
 
-    public HomeScreen(JFrame frame){
+    public HomeScreen(JFrame frame, Sweep sweep){
         this.homeScreen = frame;
+        this.sweep = sweep;
     }
 
     public void createHomeScreen(){
@@ -22,10 +27,14 @@ public class HomeScreen {
 
     public void setHomeFieldBounds(){
         powerButton.setBounds(50,150,100,30);
+        batteryLabel.setBounds(50,200,150,50);
+        batteryStatus.setBounds(200,210,100,30);
     }
 
     public void addComponentsToHomeScreen(){
         homeScreen.add(powerButton);
+        homeScreen.add(batteryLabel);
+        homeScreen.add(batteryStatus);
        
         homeScreen.setVisible(true);
     }
@@ -42,7 +51,8 @@ public class HomeScreen {
                     powerButton.setText("ON");
             }
         });
-       
+        
+        //Battery Status
+        batteryStatus.setText(String.valueOf(sweep.getBattery().getBatteryPercentage() + " %"));
     }
-    
 }
