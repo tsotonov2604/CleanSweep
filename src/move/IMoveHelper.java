@@ -5,4 +5,5 @@ public interface IMoveHelper {
      Tile moveDown();
      Tile moveLeft();
      Tile moveRight();
+     Tile moveTo(int x,int y);
 }
