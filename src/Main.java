@@ -6,13 +6,12 @@ import move.Tile;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
 import battery.*;
-
 import ChargingStation.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
 import DirtCapacity.*;
+import GUI.LoginScreen;
 
 
 
@@ -20,6 +19,11 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        //GUI
+        JFrame loginScreenFrame = new JFrame("Login");
+        LoginScreen gui = new LoginScreen(loginScreenFrame);
+        gui.createLoginScreen();
+        
         Grid grid = new Grid(10);
         grid.printGrid();
 
