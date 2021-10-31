@@ -32,13 +32,4 @@ public class DirtSensor {
         }
     }
 
-    public void BagMissing() {
-        Capacity = sensor.getCurrentBagSize();
-        if (Capacity == 0) {
-            JOptionPane.showMessageDialog(null, "Dirt bag not found",
-                    "WARNING", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-
-
 }
