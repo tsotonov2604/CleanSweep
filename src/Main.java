@@ -1,4 +1,3 @@
-
 import ChargingStation.*;
 import move.Grid;
 import move.Sweep;
@@ -62,6 +61,7 @@ public class Main {
         OnOff.setVisible(true);
         OnOff.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
         //DirtCapacityOfSweeper
         DirtCapacityOfSweeper info= new DirtCapacityOfSweeper();
         info.dirtCapacity();
@@ -70,6 +70,10 @@ public class Main {
         DirtSensor war= new DirtSensor();
         war.FullBag();
         war.EmptyBag();
+
+
+
+
 
         //Battery
         Battery lowWar= new Battery();
