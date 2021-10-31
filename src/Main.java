@@ -1,42 +1,59 @@
-
 import ChargingStation.*;
 import move.Grid;
+import move.Sweep;
 import move.Tile;
 import schedule.Schedule;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
-import battery.Battery;
+import battery.*;
+
+import ChargingStation.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import DirtCapacity.DirtSensor;
-import DirtCapacity.DirtCapacityOfSweeper;
+
+import DirtCapacity.*;
+
+
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
 
-        //schedule
-        JLabel label = new JLabel("Selected Date:");
-		JTextField text = new JTextField(20);
-		JButton b = new JButton("popup");
-		JPanel p = new JPanel();
-		p.add(label);
-		p.add(text);
-		p.add(b);
-		JFrame f = new JFrame();
-		f.getContentPane().add(p);
-		f.pack();
-		f.setVisible(true);
-		b.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				text.setText(new Schedule(f).setPickedDate());
-			}
-		});
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-       
-        //OnOffButton
+        Grid grid = new Grid(10);
+        grid.printGrid();
+
+        grid.printRow(7);
+        grid.initEdges();
+        grid.castEdges();
+        System.out.println(grid.getGridHead().getRight().getDown().edges.toString());
+        ShortestPath  shortestPath = new ShortestPath();
+        shortestPath.computePaths(grid.getGridHead().getVertex());
+        Vertex I = grid.getSpecificTile(3,3).getVertex();
+
+        double minI = I.minDistance;
+        double currentCharge = 100;
+        ArrayList<Vertex> path;
+        if(minI == currentCharge){
+            path = (ArrayList<Vertex>) shortestPath.getShortestPathTo(I);
+            System.out.println("Path: " + path);
+        }else {
+            path = (ArrayList<Vertex>) shortestPath.getShortestPathTo(I);
+            System.out.println("Path: " + path);
+        }
+
+        Sweep sweepObj = new Sweep(0,0,grid);
+        Grid.clean(sweepObj,path);
+
+
+        System.out.println("------------CHARGING STATION------------");
+        ChargingStation cs = new ChargingStation();
+        cs.setCurrentLocation(grid.getX(),grid.getY()); //current location of Sweep as set in grid addSweep 3,3
+        System.out.println("Sweep is located at point: " + cs.getCurrentLocation());
+        cs.setChargingStationLocation(grid); //sets the location of the charging station on the Grid -i.e position 0,0
+
+         //OnOffButton
         OnOffButton OnOff = new OnOffButton();
         OnOff.setTitle("Turning a device On/Off");
         OnOff.setLayout(new FlowLayout());
@@ -46,6 +63,7 @@ public class Main {
         OnOff.setVisible(true);
         OnOff.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
         //DirtCapacityOfSweeper
         DirtCapacityOfSweeper info= new DirtCapacityOfSweeper();
         info.dirtCapacity();
@@ -54,77 +72,14 @@ public class Main {
         DirtSensor war= new DirtSensor();
         war.FullBag();
         war.EmptyBag();
-      
-      
-      // Movement   
-        Grid grid = new Grid(10);
-        grid.printGrid();
-        System.out.println("------------Adding Sweep--------");
-        Tile sweep = grid.addSweep(3, 3);
-        System.out.println("---------Moving Up-----------");
-        sweep = sweep.moveUp();
-        grid.printGrid();
-       // Thread.sleep(1000);
-        System.out.println("----------Moving Right----------");
-        sweep = sweep.moveRight();
-        grid.printGrid();
-        //Thread.sleep(1000);
-        System.out.println("------------Moving Down--------");
-        sweep = sweep.moveDown();
-        grid.printGrid();
-        System.out.println("------------Moving Left--------");
-        sweep = sweep.moveLeft();
-        grid.printGrid();
 
-     
-        System.out.println("BATTERY");
 
-        Battery battery = new Battery();
-        battery.CurrentBatteryPercent = 10;
-        System.out.println(battery.getCurrentBatteryPercent()+" Battery Percentage");
 
-        System.out.println("------------CHARGING STATION------------");
-        ChargingStation cs = new ChargingStation();
-        cs.setCurrentLocation(grid.getX(),grid.getY()); //current location of Sweep as set in grid addSweep 3,3
-        System.out.println("Sweep is located at point: " + cs.getCurrentLocation());
-        cs.setChargingStationLocation(grid); //sets the location of the charging station on the Grid -i.e position 0,0
-        if(battery.LowBattery()){
-            cs.navigateToChargingStation(grid,sweep);
-            cs.charge();
-            grid.printGrid();
-        }
 
-        System.out.println("Shortest path");
-        Vertex A = new Vertex("A");
-        Vertex B = new Vertex("B");
-        Vertex C = new Vertex("C");
-        Vertex D = new Vertex("D");
-        Vertex E = new Vertex("E");
-        Vertex F = new Vertex("F");
-        Vertex G = new Vertex("G");
-        Vertex H = new Vertex("H");
-        Vertex I = new Vertex("I");
 
-        A.adjacencies = new Edge[]{ new Edge(B, 1) ,new Edge(D, 1) };
-        B.adjacencies = new Edge[]{ new Edge(A, 1), new Edge(E,1),new Edge(C,1)};
-        C.adjacencies = new Edge[]{ new Edge(B, 1),new Edge(F, 1)   };
-        D.adjacencies = new Edge[]{ new Edge(A, 1),new Edge(E, 1),new Edge(G, 1)   };
-        E.adjacencies = new Edge[]{ new Edge(B, 1),new Edge(D, 1),new Edge(F, 1),new Edge(H, 1) };
-        F.adjacencies = new Edge[]{ new Edge(C, 1),new Edge(E, 1),new Edge(I, 1)  };
-        G.adjacencies = new Edge[]{ new Edge(D, 1),new Edge(H, 1)  };
-        H.adjacencies = new Edge[]{ new Edge(G, 1),new Edge(E, 1),new Edge(I, 1) };
-        I.adjacencies = new Edge[]{ new Edge(F, 1),new Edge(H, 1) };
-        ShortestPath shortestPath = new ShortestPath();
-        shortestPath.computePaths(A);
-        double minI = I.minDistance;
-        double currentCharge = 100;
-        if(minI == currentCharge){
-            ArrayList<Vertex> path = (ArrayList<Vertex>) shortestPath.getShortestPathTo(I);
-            System.out.println("Path: " + path);
-        }else{
-            ArrayList<Vertex> path = (ArrayList<Vertex>)  shortestPath.getShortestPathTo(I);
-            System.out.println("Path: " + path);
-        }
-
+        //Battery
+        Battery lowWar= new Battery();
+        lowWar.LowBatteryWar();
+        lowWar.fullBatteryInfo();
     }
 }

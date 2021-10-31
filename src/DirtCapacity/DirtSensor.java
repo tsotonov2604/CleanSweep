@@ -24,5 +24,12 @@ public class DirtSensor {
             }
      }
 
+     public void BagCapcityAlert() {
+        Capacity = sensor.getCurrentBagSize();
+        if (Capacity == 90) {
+            JOptionPane.showMessageDialog(null, "The dirt bag is almost full!",
+                    "ALERT", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
 }
