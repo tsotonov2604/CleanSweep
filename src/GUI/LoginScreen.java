@@ -2,23 +2,27 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.*;
 import move.*;
+import GUI.User;
 
 public class LoginScreen {
 
     JFrame loginScreen;
     Sweep sweep;
+    User user;
     JLabel welcomeLabel = new JLabel("<html><span style='color: blue;'>Welcome To The Clean Sweep Portal!</span></html>");
-    JLabel userLabel=new JLabel("USERNAME");
-    JLabel passwordLabel=new JLabel("PASSWORD");
+    JLabel userLabel=new JLabel("Username");
+    JLabel passwordLabel=new JLabel("Password");
     JTextField userTextField=new JTextField();
     JPasswordField passwordField=new JPasswordField();
-    JButton loginButton=new JButton("LOGIN");
-    JButton resetButton=new JButton("RESET");
+    JButton loginButton=new JButton("Login");
+    JButton resetButton=new JButton("Reset");
+    JButton registerButton = new JButton("Register");
     JCheckBox showPassword=new JCheckBox("Show Password");
 
-    public LoginScreen(JFrame frame, Sweep sweep){
+    public LoginScreen(JFrame frame, Sweep sweep, User user){
         this.loginScreen = frame;
         this.sweep = sweep;
+        this.user= user;
     }
     
     public void createLoginScreen(){  
@@ -28,7 +32,6 @@ public class LoginScreen {
         setLoginFieldBounds();
         addComponentsToLoginScreen();
         startActionListeners();
-
     }
 
 
@@ -41,6 +44,7 @@ public class LoginScreen {
         showPassword.setBounds(150,250,150,30);
         loginButton.setBounds(50,300,100,30);
         resetButton.setBounds(200,300,100,30);
+        registerButton.setBounds(50,370,100,30);
 
     }
 
@@ -53,6 +57,7 @@ public class LoginScreen {
         loginScreen.add(loginButton);
         loginScreen.add(resetButton);
         loginScreen.add(showPassword);
+        loginScreen.add(registerButton);
 
         loginScreen.setVisible(true);
     }
@@ -60,8 +65,15 @@ public class LoginScreen {
     public void goToHomeScreen() {
         loginScreen.setVisible(false); 
         JFrame homeScreenFrame = new JFrame("Clean Sweep Home");
-        HomeScreen homeScreen = new HomeScreen(homeScreenFrame, sweep);
+        HomeScreen homeScreen = new HomeScreen(homeScreenFrame, sweep, this.user);
         homeScreen.createHomeScreen();
+    }
+
+    public void goToRegistrationScreen(){
+        loginScreen.setVisible(false); 
+        JFrame registrationScreenFrame = new JFrame("Registration");
+        RegistrationScreen registrationScreen = new RegistrationScreen(registrationScreenFrame, sweep);
+        registrationScreen.createRegistrationScreen();
     }
 
    
@@ -73,7 +85,8 @@ public class LoginScreen {
                 String pwdText;
                 userText = userTextField.getText();
                 pwdText = passwordField.getText();
-                if (userText.equalsIgnoreCase("dev") && pwdText.equalsIgnoreCase("12345")) { //HARDCODED LOGIN CREDENTIALS !!!
+                //Can hardcode username & pasword for testing
+                if (userText.equalsIgnoreCase(user.getUsername()) && pwdText.equalsIgnoreCase(user.getPassword())) { 
                     JOptionPane.showMessageDialog(loginScreen, "Login Successful"); 
                     goToHomeScreen();            
                 } else {
@@ -98,6 +111,13 @@ public class LoginScreen {
                 } else {
                      passwordField.setEchoChar('*');
                 }
-        }}});      
+        }}});
+        
+        //Register Button
+        registerButton.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e){
+            if (e.getSource() == registerButton) {
+                goToRegistrationScreen();
+            }
+        }});
     }
 }

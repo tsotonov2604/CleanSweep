@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import DirtCapacity.*;
-import GUI.LoginScreen;
+import GUI.*;
 
 
 
@@ -53,7 +53,8 @@ public class Main {
 
         //GUI
         JFrame loginScreenFrame = new JFrame("Login");
-        LoginScreen gui = new LoginScreen(loginScreenFrame, sweepObj );
+        User user = new User();
+        LoginScreen gui = new LoginScreen(loginScreenFrame, sweepObj,user );
         gui.createLoginScreen();
 
     }
