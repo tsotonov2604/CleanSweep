@@ -8,14 +8,11 @@ import javax.swing.JToggleButton;
 public class OnOffButton extends JFrame implements ItemListener {
 
     public JToggleButton button;
-    public OnOffButton() {}
-    public void setJToggleButton() {
-        button = new JToggleButton("ON");
-        add(button);
-    }
+
     public void setAction() {
         button.addItemListener(this);
     }
+
     public void itemStateChanged(ItemEvent eve) {
         if (button.isSelected())
             button.setText("OFF");

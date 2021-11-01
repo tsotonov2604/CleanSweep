@@ -6,21 +6,20 @@ import schedule.Schedule;
 import ChargingStation.ChargingStation;
 import Power.OnOffButton;
 import battery.*;
-
 import ChargingStation.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
 import DirtCapacity.*;
+import GUI.*;
 
 
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
+   
         Grid grid = new Grid(10);
         grid.printGrid();
 
@@ -53,17 +52,7 @@ public class Main {
         System.out.println("Sweep is located at point: " + cs.getCurrentLocation());
         cs.setChargingStationLocation(grid); //sets the location of the charging station on the Grid -i.e position 0,0
 
-         //OnOffButton
-        OnOffButton OnOff = new OnOffButton();
-        OnOff.setTitle("Turning a device On/Off");
-        OnOff.setLayout(new FlowLayout());
-        OnOff.setJToggleButton();
-        OnOff.setAction();
-        OnOff.setSize(300, 200);
-        OnOff.setVisible(true);
-        OnOff.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
+    
         //DirtCapacityOfSweeper
         DirtCapacityOfSweeper info= new DirtCapacityOfSweeper();
         info.dirtCapacity();
@@ -71,7 +60,7 @@ public class Main {
         //DirtSensor
         DirtSensor war= new DirtSensor();
         war.FullBag();
-        war.EmptyBag();
+        //war.EmptyBag();
 
         //schedule
         JLabel label = new JLabel("Selected Date:");
@@ -91,9 +80,11 @@ public class Main {
             }
         });
 
-
-
-
+        //GUI
+        JFrame loginScreenFrame = new JFrame("Login");
+        User user = new User();
+        LoginScreen gui = new LoginScreen(loginScreenFrame, sweepObj,user );
+        gui.createLoginScreen();
 
         //Battery
         Battery lowWar= new Battery();
