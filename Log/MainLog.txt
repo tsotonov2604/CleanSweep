@@ -1,0 +1,10 @@
+
+2021-11-06 11:38:22 NAVIGATION : Clean Sweep at tile (0,0).
+2021-11-06 11:38:22 NAVIGATION : Clean Sweep at tile (0,1).
+2021-11-06 11:38:22 NAVIGATION : Clean Sweep at tile (1,1).
+2021-11-06 11:38:22 NAVIGATION : Clean Sweep at tile (2,1).
+2021-11-06 11:38:22 NAVIGATION : Clean Sweep at tile (2,2).
+2021-11-06 11:38:22 NAVIGATION : Clean Sweep at tile (3,2).
+2021-11-06 11:38:22 NAVIGATION : Clean Sweep at tile (3,3).
+2021-11-06 11:38:22 Battery : Clean Sweep battery status is 93.0.
+2021-11-06 11:38:22 POWER : Clean Sweep is cleaning dirt(0/100).
