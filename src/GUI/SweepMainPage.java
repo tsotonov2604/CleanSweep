@@ -152,7 +152,7 @@ public class SweepMainPage extends JFrame{
     private void initPanels() {
 
         jPanel1.setBackground(new Color(255, 255, 255));
-        jLabel1.setFont(new Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setFont(new Font("Tahoma", 1, 12));
         jLabel1.setText("Sweep Connectivity:");
 
         jSeparator2.setOrientation(SwingConstants.VERTICAL);
