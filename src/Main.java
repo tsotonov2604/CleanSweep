@@ -65,13 +65,21 @@ public class Main {
         //schedule
         JLabel label = new JLabel("Selected Date:");
         final JTextField text = new JTextField(20);
-        JButton b = new JButton("popup");
+        JButton b = new JButton("Calendar");
+        JButton setDate = new JButton("Schedule Cleaning");
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         JPanel p = new JPanel();
+        JPanel p2 = new JPanel();
+        p2.add(setDate);
         p.add(label);
         p.add(text);
         p.add(b);
-        final JFrame f = new JFrame();
-        f.getContentPane().add(p);
+        mainPanel.add(p);
+        mainPanel.add(p2);
+        JFrame f = new JFrame("Schedule");
+        f.getContentPane().add(mainPanel);
+        f.setPreferredSize(new Dimension(500,125));
         f.pack();
         f.setVisible(true);
         b.addActionListener(new ActionListener() {
