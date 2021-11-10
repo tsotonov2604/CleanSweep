@@ -63,10 +63,11 @@ public class LoginScreen {
     }
 
     public void goToHomeScreen() {
-        loginScreen.setVisible(false); 
-        JFrame homeScreenFrame = new JFrame("Clean Sweep Home");
-        HomeScreen homeScreen = new HomeScreen(homeScreenFrame, sweep, this.user);
-        homeScreen.createHomeScreen();
+        loginScreen.setVisible(false);
+//        JFrame homeScreenFrame = new JFrame("Clean Sweep Home");
+//        HomeScreen homeScreen = new HomeScreen(homeScreenFrame, sweep, this.user);
+//        homeScreen.createHomeScreen();
+        SweepMainPage.createPage();
     }
 
     public void goToRegistrationScreen(){

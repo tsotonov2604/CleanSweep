@@ -2,7 +2,10 @@ package move;
 
 import battery.Battery;
 
+import java.util.UUID;
+
 public class Sweep {
+    String serialNumber;
     Battery battery;
     Grid pGrid;
     int x,y;
@@ -15,6 +18,10 @@ public class Sweep {
         this.y = y;
         //this.tile = pGrid.getSpecificTile(x,y);
         //this.tile.parentGrid = pGrid;
+    }
+
+    public Sweep(){
+        serialNumber = UUID.randomUUID().toString();
     }
 
     public void clean(Tile tile){
@@ -55,5 +62,8 @@ public class Sweep {
         this.pGrid = pGrid;
     }
 
+    public String getSerialNumber() {
+        return serialNumber;
+    }
 
 }
