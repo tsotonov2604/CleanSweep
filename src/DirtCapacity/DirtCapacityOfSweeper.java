@@ -4,17 +4,19 @@ import Log.Logger;
 
 public class DirtCapacityOfSweeper{
 
-    private LinkedList<Integer> Bag = new LinkedList<>();
+    private static int getCurrentSize;
+    //private LinkedList<Integer> Bag = new LinkedList<>();
 
     public DirtCapacityOfSweeper(){}
 
-    public int getCurrentBagSize(){
-        return Bag.size();
+    public static int getCurrentBagSize(){
+        return getCurrentSize;
     }
 
-    public void dirtCapacity(){
-        System.out.println("The dirt capacity is up to 100. The current dirt quantity is: " +getCurrentBagSize());
-        Logger.writeToDirtCapacityLog(getCurrentBagSize(),100);
+    public static void dirtCapacity(){
+        getCurrentSize += 1;
+        System.out.println("The dirt capacity is up to 100. The current dirt quantity is: " +getCurrentSize);
+        Logger.writeToDirtCapacityLog(getCurrentSize,100);
     }
 
 }

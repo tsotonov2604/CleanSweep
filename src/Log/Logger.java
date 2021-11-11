@@ -40,13 +40,8 @@ public final class Logger {
     {
         try{
             String filesub = "DirtCapacityLog.txt";
-
-            String output;
-            if(maxDirt-currentDirt==0)
-                output = "Clean Sweep dirt capacity has been reached("+currentDirt+"/"+maxDirt+").";
-            else
-                output = "Clean Sweep is cleaning dirt("+currentDirt+"/"+maxDirt+").";
-            writeToLogs(output, "POWER", filesub);
+            String output = "Clean Sweep is cleaning dirt("+currentDirt+"/"+maxDirt+").";
+            writeToLogs(output, "Dirt", filesub);
         }
         catch(Exception e)
         {

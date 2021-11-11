@@ -1,6 +1,7 @@
 package move;
 
 import battery.Battery;
+import DirtCapacity.DirtCapacityOfSweeper;
 
 public class Sweep {
     Battery battery;
@@ -20,6 +21,7 @@ public class Sweep {
     public void clean(Tile tile){
         this.battery.decreaseBattery(tile.getDirt());
         tile.setDirt(0);
+        DirtCapacityOfSweeper.dirtCapacity();
     }
 
 
