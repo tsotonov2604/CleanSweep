@@ -3,6 +3,7 @@ package GUI;
 
 import move.Grid;
 import move.Sweep;
+import schedule.Schedule;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -28,6 +29,8 @@ public class SweepMainPage extends JFrame{
     private JLabel floorPlanImg;
     private JPanel jPanel1;
     private JPanel jPanel2;
+    private JLabel jLabel3;
+    private JLabel batteryPercentage;
     private JScrollPane jScrollPane1;
     private JSeparator jSeparator1;
     private JSeparator jSeparator2;
@@ -60,6 +63,9 @@ public class SweepMainPage extends JFrame{
         scheduleBtn = new JButton();
         logoutBtn = new JButton();
         registerBtn = new JButton();
+        jLabel3 = new JLabel();
+        batteryPercentage = new JLabel();
+
 
         cleaningConsole.setEditable(false);
         cleaningConsole.setColumns(20);
@@ -101,6 +107,11 @@ public class SweepMainPage extends JFrame{
                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                .addComponent(registerBtn)
                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addGap(18, 18, 18)
+               .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                       .addComponent(jLabel3)
+                       .addComponent(batteryPercentage))
+               .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                .addComponent(scheduleBtn)
                .addGap(18, 18, 18)
                .addComponent(cleanBtn)
@@ -140,6 +151,10 @@ public class SweepMainPage extends JFrame{
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jLabel3.setVisible(false);
+        batteryPercentage.setVisible(false);
+
     }
 
 
@@ -162,7 +177,11 @@ public class SweepMainPage extends JFrame{
                                         .addComponent(cleanBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addComponent(logoutBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(registerBtn, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                                        .addComponent(registerBtn, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(batteryPercentage)))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jSeparator2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -180,6 +199,7 @@ public class SweepMainPage extends JFrame{
         buttonGroup1.add(offBtn);
         offBtn.setText("Turn Off");
         cleanBtn.setText("Clean");
+        cleanBtn.setVisible(false);
         floorSelectBtn.setText("Select Floor Plan");
         scheduleBtn.setText("Schedule");
         logoutBtn.setText("Logout");
@@ -187,8 +207,13 @@ public class SweepMainPage extends JFrame{
 
 
         registerBtn.addActionListener(evt -> registerBtnActionPerformed(evt));
-
         floorSelectBtn.addActionListener(evt -> floorSelectBtnActionPerformed(evt));
+        scheduleBtn.addActionListener(evt -> scheduleBtnActionPerformed(evt));
+        logoutBtn.addActionListener(evt -> logoutBtnActionPerformed(evt));
+        onBtn.addActionListener(evt -> onBtnActionPerformed(evt));
+        offBtn.addActionListener(evt -> offBtnActionPerformed(evt));
+
+
 
     }
 
@@ -197,7 +222,8 @@ public class SweepMainPage extends JFrame{
         jPanel1.setBackground(new Color(255, 255, 255));
         jLabel1.setFont(new Font("Arial", Font.BOLD, 12));
         jLabel1.setText("Sweep Connectivity:");
-
+        jLabel3.setText("Battery:");
+        batteryPercentage.setText("100%");
         jSeparator2.setOrientation(SwingConstants.VERTICAL);
 
 
@@ -222,8 +248,11 @@ public class SweepMainPage extends JFrame{
         if (sweep == null) {
             sweep = new Sweep();
             JOptionPane.showMessageDialog(this,sweep.getSerialNumber(),"Serial Number Registered",JOptionPane.INFORMATION_MESSAGE);
-            cleaningConsole.setText(cleaningConsole.getText()+"\n"+sweep.getSerialNumber());
+            cleaningConsole.append("\n"+sweep.getSerialNumber());
             offBtn.setSelected(true);
+            jLabel3.setVisible(true);
+            batteryPercentage.setVisible(true);
+            cleanBtn.setVisible(true);
         }
         else{
             JOptionPane.showMessageDialog(this,sweep.getSerialNumber()+" : "+"Already registered!","ERROR!",JOptionPane.ERROR_MESSAGE);
@@ -249,6 +278,52 @@ public class SweepMainPage extends JFrame{
         catch (Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this,"Couldn't load floor....","ERROR!",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void scheduleBtnActionPerformed(ActionEvent evt) {
+        JLabel label = new JLabel("Selected Date:");
+        final JTextField text = new JTextField(20);
+        JButton b = new JButton("popup");
+        JPanel p = new JPanel();
+        p.add(label);
+        p.add(text);
+        p.add(b);
+        final JFrame f = new JFrame();
+        f.getContentPane().add(p);
+        f.pack();
+        f.setVisible(true);
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                text.setText(new Schedule(f).setPickedDate());
+                cleaningConsole.append("\nScheduled for "+text.getText());
+            }
+        });
+
+
+    }
+
+    private void logoutBtnActionPerformed(ActionEvent evt) {
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
+
+    private void onBtnActionPerformed(ActionEvent evt) {
+        if(sweep != null) {
+            cleaningConsole.append("\nSweep turned ON");
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"MUST REGISTER A SWEEP","ERROR!",JOptionPane.ERROR_MESSAGE);
+            buttonGroup1.clearSelection();
+        }
+    }
+
+    private void offBtnActionPerformed(ActionEvent evt) {
+        if(sweep != null) {
+            cleaningConsole.append("\nSweep turned OFF");
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"MUST REGISTER A SWEEP","ERROR!",JOptionPane.ERROR_MESSAGE);
+            buttonGroup1.clearSelection();
         }
     }
 
