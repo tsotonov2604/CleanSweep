@@ -3,4 +3,5 @@ bin/
 .classpath
 .project
 .settings/org.eclipse.jdt.core.prefs
+.project
 .settings/org.eclipse.jdt.apt.core.prefs
