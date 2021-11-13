@@ -3,6 +3,7 @@ package move;
 import ChargingStation.Edge;
 import ChargingStation.Vertex;
 import battery.Battery;
+import Log.Logger;
 
 import java.util.ArrayList;
 
@@ -233,10 +234,12 @@ public class Grid {
                 System.out.println("Moving to "+t.getX()+" : "+t.getY());
                 sweep.moveTo(t.getX(), t.getY());
                 System.out.println("Sweep At "+sweep.getX()+" "+sweep.getY());
+                Logger.writeToNavigationSensorLog(sweep.getX(),sweep.getY());
             }
             sweep.pGrid.printClean();
             System.out.println("Battery after cleaning...");
             System.out.println(sweep.getBattery().getBatteryPercentage());
+            Logger.writeToBatteryLog(sweep.getBattery().getBatteryPercentage());
         }
         catch (Exception e){
             e.printStackTrace();
