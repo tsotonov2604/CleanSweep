@@ -1,18 +1,21 @@
 package DirtCapacity;
 import java.util.LinkedList;
+import Log.Logger;
 
 public class DirtCapacityOfSweeper{
 
-    private LinkedList<Integer> Bag = new LinkedList<>();
+    //private LinkedList<Integer> Bag = new LinkedList<>();
+    private static int getCurrentSize;
 
     public DirtCapacityOfSweeper(){}
 
-    public int getCurrentBagSize(){
-        return Bag.size();
+    public static int getCurrentBagSize(){
+        return getCurrentSize;
     }
-
-    public void dirtCapacity(){
-        System.out.println("The dirt capacity is up to 100. The current dirt quantity is: " +getCurrentBagSize());
+    public static void dirtCapacity(){
+        getCurrentSize += 1;
+        System.out.println("The dirt capacity is up to 100. The current dirt quantity is: " +getCurrentSize);
+        Logger.writeToDirtCapacityLog(getCurrentSize,100);
     }
 
 }
