@@ -1,5 +1,6 @@
 package DirtCapacity;
 import javax.swing.*;
+import Log.Logger;
 
 
 public class DirtSensor {
@@ -14,6 +15,7 @@ public class DirtSensor {
         if (Capacity == 100) {
             JOptionPane.showMessageDialog(null, "The bag is full!",
                     "WARNING", JOptionPane.WARNING_MESSAGE);
+            Logger.writeToDirtCapacityLog(sensor.getCurrentBagSize(),100);
         }
     }
         public void EmptyBag(){
