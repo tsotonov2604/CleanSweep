@@ -1,6 +1,8 @@
 package move;
 
 
+import Barriers.Barrier;
+import Barriers.Door;
 import ChargingStation.Edge;
 import ChargingStation.Vertex;
 
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 public class Tile implements IMoveHelper, Comparable<Tile> {
 
     Grid parentGrid;
+    Barrier door;
+    boolean hasDoor = false;
 
     public void clean(ArrayList<Vertex> path,Grid g) {
         ArrayList<Tile> tilesPath = convertPath(path,g);
@@ -70,6 +74,7 @@ public class Tile implements IMoveHelper, Comparable<Tile> {
         vertex = new Vertex(x+""+y);
         vertex.x = this.x;
         vertex.y = this.y;
+        System.out.println("X: "+this.x+" Y: "+this.y);
     }
 
 
@@ -120,6 +125,9 @@ public class Tile implements IMoveHelper, Comparable<Tile> {
     public void setLeft(Tile left) {
         this.left = left;
     }
+
+
+
 
     @Override
     public Tile moveUp() {
@@ -209,10 +217,14 @@ public class Tile implements IMoveHelper, Comparable<Tile> {
 
     @Override
     public String toString() {
-        return "Tile{" +
+        if(door != null)
+            return "Tile{" +
+                    "x=" + x +
+                    ", y=" + y +" : "+door.toString()+
+                    '}';
+        else return "Tile{" +
                 "x=" + x +
-                ", y=" + y +
-                '}';
+                ", y=" + y +'}';
     }
 
     public void initAdjacencies(){
@@ -226,4 +238,27 @@ public class Tile implements IMoveHelper, Comparable<Tile> {
     public void setParentGrid(Grid parentGrid) {
         this.parentGrid = parentGrid;
     }
+
+    public void creatDoor(){
+        door = new Door(true);
+        hasDoor = true;
+    }
+
+    public boolean isHasDoor(){
+        return hasDoor;
+    }
+
+    public boolean isDoorOpen(){
+        if (hasDoor){
+            return door.isBlocking();
+        }
+        return true;
+    }
+
+
+
+
+
+
 }
+

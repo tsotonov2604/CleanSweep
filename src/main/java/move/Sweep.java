@@ -66,4 +66,34 @@ public class Sweep {
         return serialNumber;
     }
 
+    public void cleanArea(int startX,int endX,int startY,int endY){
+
+        System.out.println("StartX : "+startX+", EndX : "+endX);
+        System.out.println("StartY : "+startY+", EndY : "+endY);
+        Tile startTile = pGrid.getSpecificTile(startY,startX);
+
+        for(int i=startY;i<=endY;i++) {
+            if(!battery.LowBattery()) {
+                cleanRow(startTile, startX, endX);
+                startTile = startTile.getDown();
+            }
+            else {
+                charge();
+            }
+        }
+
+    }
+
+    private void charge() {
+
+    }
+
+    private void cleanRow(Tile startTile,int startX, int endX) {
+        for(int i=startX;i<=endX;i++){
+            clean(startTile);
+            startTile=startTile.getRight();
+        }
+    }
+
+
 }

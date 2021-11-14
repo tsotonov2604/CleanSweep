@@ -1,5 +1,6 @@
 package move;
 
+import Barriers.FloorType;
 import ChargingStation.Edge;
 import ChargingStation.Vertex;
 import battery.Battery;
@@ -11,15 +12,69 @@ public class Grid {
     private Tile gridHead;
     private Tile sweep;
     private Tile currentTile;
+    private final ArrayList<Grid> connections = new ArrayList<>();
     //private Sweep sweep;
     private int xAxis,yAxis, maxAxis = 0;
-    private ArrayList<Tile> rowsHeads = new ArrayList<>();
+    private final ArrayList<Tile> rowsHeads = new ArrayList<>();
+    private final ArrayList<Tile> columnHeads = new ArrayList<>();
+    private String name;
     private static Battery battery = new Battery();
     private int x;
     private int y;
+    private FloorType type;
 
 
-    public Grid(int size) { // right now only works with squares
+    public Grid(int x,int y){
+        this.x = x;
+        this.y = y;
+        int colIndex = 0;
+        int rowIndex = 0;
+        gridHead = new Tile("Floor",1,rowIndex,colIndex);
+        colIndex++;
+        //rowIndex++;
+        rowsHeads.add(gridHead);
+        Tile column = gridHead;
+        Tile row = gridHead;
+
+        if(y==0){
+            for(int i =1;i<x;i++) {
+                    //colIndex++;
+                    Tile newTile = new Tile("Floor", 1, rowIndex, colIndex);
+                    column.setRight(newTile);
+                    column.setLeft(newTile);
+                    column = column.getRight();
+                    colIndex++;
+            }
+        } else {
+            rowIndex++;
+            colIndex=0;
+            while(rowIndex <= y){
+                Tile newTile;
+                if(rowIndex != y) {
+                    newTile = new Tile("Floor", 1, rowIndex, colIndex);
+                    row.setDown(newTile);
+                    row.getDown().setUp(row);
+                }
+                initializeRows(x,row);
+                row = row.getDown();
+                rowIndex++;
+            }
+        }
+        constructColumnHeads();
+    }
+
+    private void initializeRows(int x, Tile rowHead) {
+        for(int i=1;i<x;i++){
+            Tile newTile = new Tile("Floor",1,rowHead.getX(),i);
+            rowHead.setRight(newTile);
+            rowHead.getRight().setLeft(rowHead);
+            rowHead = rowHead.getRight();
+        }
+    }
+
+
+
+    public Grid(int size) {
 
         this.maxAxis = size;
         int colIndex = 0;
@@ -68,9 +123,49 @@ public class Grid {
             rowIndex++;
         }
 
-
+        constructColumnHeads();
     }
 
+    private void constructColumnHeads() {
+        for(int i=0;i<maxAxis;i++){
+            columnHeads.add(getSpecificTile(0,i));
+        }
+        System.out.println(columnHeads);
+    }
+
+//    public void disconnectColumn(int y, Edge.Direction direction){
+//
+//        Tile column = columnHeads.get(y);
+//        Tile column2 = columnHeads.get(y+1);
+//        while(column != null){
+//            System.out.println(column.toString());
+//            switch (direction){
+//                case UP: column.disconnectUp();column2.disconnectUp();break;
+//                case DOWN: column.disconnectDown(); column2.disconnectDown(); break;
+//                case LEFT: column.disconnectLeft(); column2.disconnectRight(); break;
+//                case RIGHT: column.disconnectRight(); column2.disconnectLeft(); break;
+//            }
+//            column = column.getDown();
+//            column2 = column2.getDown();
+//        }
+//
+//    }
+//
+//    public void disconnectRow(int x, Edge.Direction direction){
+//        Tile row = rowsHeads.get(x);
+//        Tile row2 = rowsHeads.get(x+1);
+//        while(row != null){
+//            System.out.println(row.toString());
+//            switch (direction){
+//                case UP: row.disconnectUp();row2.disconnectDown();break;
+//                case DOWN: row.disconnectDown(); row2.disconnectUp(); break;
+//                case LEFT: row.disconnectLeft(); row2.disconnectRight(); break;
+//                case RIGHT: row.disconnectRight(); row2.disconnectLeft(); break;
+//            }
+//            row = row.getRight();
+//            row2 = row.getRight();
+//        }
+//    }
 
     public void printGrid(){
 
@@ -86,6 +181,25 @@ public class Grid {
             temp = currentRow.getDown();
             currentRow = temp;
         }
+    }
+
+    public String getGridStructure(){
+
+        Tile temp = gridHead;
+        Tile currentRow = gridHead;
+        StringBuilder strBldr = new StringBuilder("");
+
+        while(currentRow != null) {
+            while (temp != null) {
+                strBldr.append(temp.getX() + ""+temp.getY()+ " : ");
+                temp = temp.getRight();
+            }
+            strBldr.append("\n");
+            temp = currentRow.getDown();
+            currentRow = temp;
+        }
+
+        return strBldr.toString();
     }
 
     public void printClean(){
@@ -294,4 +408,33 @@ public class Grid {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void configureSubGrids(int startX,int endX, int startY, int endY,int dirt){
+        for(int i=startX;i<endX;i++){
+            for(int j=startY;j<endY;j++){
+                Tile t = getSpecificTile(i,j);
+                t.setDirt(dirt);
+            }
+        }
+    }
+
+    public void addConnection(Grid grid){
+        connections.add(grid);
+    }
+
+    public ArrayList<Grid> getConnections(){
+        return connections;
+    }
+
+    @Override
+    public String toString() {
+        return "\n Grid : \n"+getGridStructure();
+    }
 }
