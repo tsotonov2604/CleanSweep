@@ -1,4 +1,4 @@
-package gui;
+package GUI;
 import javax.swing.*;
 import java.awt.event.*;
 import move.*;
@@ -7,13 +7,13 @@ public class HomeScreen {
 
     JFrame homeScreen;
     Sweep sweep;
-    User user;
+    gui.User user;
     JButton powerButton = new JButton("ON");
     JLabel batteryLabel=new JLabel("BATTERY PERCENTAGE:");
     JLabel batteryStatus = new JLabel("");
     JLabel welcomeLabel = new JLabel("");
 
-    public HomeScreen(JFrame frame, Sweep sweep,User user){
+    public HomeScreen(JFrame frame, Sweep sweep,gui.User user){
         this.homeScreen = frame;
         this.sweep = sweep;
         this.user = user;

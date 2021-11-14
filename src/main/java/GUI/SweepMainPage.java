@@ -1,10 +1,11 @@
-package gui;
+package GUI;
 
 
 import move.Grid;
 import move.Simulation;
 import move.Sweep;
 import schedule.Schedule;
+import log.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -405,6 +406,7 @@ public class SweepMainPage extends JFrame{
             cleaningConsole.append(s);
             cleaningConsole.append("returning to charging station...");
             cleaningConsole.append("\n Battery is "+sweep.getBattery().getBatteryPercentage());
+            Logger.writeToBatteryLog(sweep.getBattery().getBatteryPercentage());
             cleaningConsole.append("\n Bag has "+sweep.dirtSensor.Capacity);
             cleaningConsole.append("\ncharging and emptying bag...");
             System.out.println(cleanedAreas+" : Areas");
