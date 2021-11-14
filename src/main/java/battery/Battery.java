@@ -63,6 +63,10 @@ public class Battery {
         CurrentBatteryPercent -= i;
     }
 
+    public void charge(){
+        this.CurrentBatteryPercent = 100;
+    }
+
 
 
 }

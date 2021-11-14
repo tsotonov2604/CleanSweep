@@ -1,5 +1,6 @@
 package move;
 
+import DirtCapacity.DirtSensor;
 import battery.Battery;
 
 import java.util.UUID;
@@ -10,12 +11,14 @@ public class Sweep {
     Grid pGrid;
     int x,y;
     Tile tile;
+    DirtSensor dirtSensor;
 
     public Sweep(int x,int y, Grid grid) {
         this.battery = new Battery();
         this.pGrid = grid;
         this.x = x;
         this.y = y;
+        this.dirtSensor = new DirtSensor();
         //this.tile = pGrid.getSpecificTile(x,y);
         //this.tile.parentGrid = pGrid;
     }
@@ -26,6 +29,7 @@ public class Sweep {
 
     public void clean(Tile tile){
         this.battery.decreaseBattery(tile.getDirt());
+        this.dirtSensor.addToCapacity(tile.getDirt());
         tile.setDirt(0);
     }
 
@@ -73,7 +77,7 @@ public class Sweep {
         Tile startTile = pGrid.getSpecificTile(startY,startX);
 
         for(int i=startY;i<=endY;i++) {
-            if(!battery.LowBattery()) {
+            if(battery.getBatteryPercentage() > 20.0) {
                 cleanRow(startTile, startX, endX);
                 startTile = startTile.getDown();
             }
@@ -84,8 +88,12 @@ public class Sweep {
 
     }
 
-    private void charge() {
-
+    public void charge() {
+        System.out.println("Returning to Charging station..");
+        this.setLocation(0,9);
+        System.out.println("Charging...");
+        battery.charge();
+        dirtSensor.emptyBag();
     }
 
     private void cleanRow(Tile startTile,int startX, int endX) {
