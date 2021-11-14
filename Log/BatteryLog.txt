@@ -1,2 +1,6 @@
 
 2021-11-11 13:19:59 Battery : Clean Sweep battery status is 93.0.
+2021-11-14 17:12:13 Battery : Clean Sweep battery status is 60.0.
+2021-11-14 17:12:21 Battery : Clean Sweep battery status is 43.0.
+2021-11-14 17:12:29 Battery : Clean Sweep battery status is 52.0.
+2021-11-14 17:12:37 Battery : Clean Sweep battery status is 98.0.

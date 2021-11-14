@@ -5,7 +5,7 @@ import barriers.Floor;
 import battery.*;
 import charging_station.*;
 import dirt_capacity.*;
-import gui.*;
+import GUI.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +19,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
   
         JFrame loginScreenFrame = new JFrame("Login");
-        User user = new User();
-        LoginScreen gui = new LoginScreen(loginScreenFrame, null,user );
+        gui.User user = new gui.User();
+        GUI.LoginScreen gui = new GUI.LoginScreen(loginScreenFrame, null,user );
         gui.createLoginScreen();
 
     }

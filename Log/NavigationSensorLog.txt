@@ -6,3 +6,16 @@
 2021-11-11 13:19:58 NAVIGATION : Clean Sweep at tile (2,2).
 2021-11-11 13:19:58 NAVIGATION : Clean Sweep at tile (3,2).
 2021-11-11 13:19:58 NAVIGATION : Clean Sweep at tile (3,3).
+2021-11-14 17:12:13 NAVIGATION : Clean Sweep at tile (5,0).
+2021-11-14 17:12:21 NAVIGATION : Clean Sweep at tile (2,4).
+2021-11-14 17:12:21 NAVIGATION : Clean Sweep at tile (4,0).
+2021-11-14 17:12:21 NAVIGATION : Clean Sweep at tile (0,0).
+2021-11-14 17:12:21 NAVIGATION : Clean Sweep at tile (3,0).
+2021-11-14 17:12:21 NAVIGATION : Clean Sweep at tile (3,2).
+2021-11-14 17:12:21 NAVIGATION : Clean Sweep at tile (1,6).
+2021-11-14 17:12:21 NAVIGATION : Clean Sweep at tile (0,8).
+2021-11-14 17:12:29 NAVIGATION : Clean Sweep at tile (3,6).
+2021-11-14 17:12:29 NAVIGATION : Clean Sweep at tile (9,6).
+2021-11-14 17:12:29 NAVIGATION : Clean Sweep at tile (0,4).
+2021-11-14 17:12:37 NAVIGATION : Clean Sweep at tile (0,8).
+2021-11-14 17:12:37 NAVIGATION : Clean Sweep at tile (1,4).

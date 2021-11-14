@@ -3,6 +3,7 @@ package move;
 import battery.Battery;
 import dirt_capacity.DirtCapacityOfSweeper;
 import dirt_capacity.DirtSensor;
+import log.Logger;
 
 import java.util.UUID;
 
@@ -78,6 +79,8 @@ public class Sweep {
         System.out.println("StartX : "+startX+", EndX : "+endX);
         System.out.println("StartY : "+startY+", EndY : "+endY);
         Tile startTile = pGrid.getSpecificTile(startY,startX);
+        Logger.writeToNavigationSensorLog(startY,startX);
+
 
         for(int i=startY;i<=endY;i++) {
             if(battery.getBatteryPercentage() > 20.0) {

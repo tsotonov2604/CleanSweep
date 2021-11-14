@@ -1,4 +1,4 @@
-package gui;
+package GUI;
 import javax.swing.*;
 
 import gui.User;
@@ -69,13 +69,13 @@ public class LoginScreen {
 //        JFrame homeScreenFrame = new JFrame("Clean Sweep Home");
 //        HomeScreen homeScreen = new HomeScreen(homeScreenFrame, sweep, this.user);
 //        homeScreen.createHomeScreen();
-        SweepMainPage.createPage();
+        GUI.SweepMainPage.createPage();
     }
 
     public void goToRegistrationScreen(){
         loginScreen.setVisible(false); 
         JFrame registrationScreenFrame = new JFrame("Registration");
-        RegistrationScreen registrationScreen = new RegistrationScreen(registrationScreenFrame, sweep);
+        GUI.RegistrationScreen registrationScreen = new GUI.RegistrationScreen(registrationScreenFrame, sweep);
         registrationScreen.createRegistrationScreen();
     }
 
