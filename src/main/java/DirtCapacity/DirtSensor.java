@@ -31,7 +31,7 @@ public class DirtSensor {
         }
     }
 
-    public void addToCapacity(int i){
+    public synchronized void addToCapacity(int i){
         if((Capacity+i) <= 100)
             Capacity+=i;
         else

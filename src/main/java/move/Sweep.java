@@ -11,7 +11,7 @@ public class Sweep {
     Grid pGrid;
     int x,y;
     Tile tile;
-    DirtSensor dirtSensor;
+    public DirtSensor dirtSensor;
 
     public Sweep(int x,int y, Grid grid) {
         this.battery = new Battery();
@@ -19,6 +19,7 @@ public class Sweep {
         this.x = x;
         this.y = y;
         this.dirtSensor = new DirtSensor();
+        serialNumber = UUID.randomUUID().toString();
         //this.tile = pGrid.getSpecificTile(x,y);
         //this.tile.parentGrid = pGrid;
     }
@@ -70,7 +71,7 @@ public class Sweep {
         return serialNumber;
     }
 
-    public void cleanArea(int startX,int endX,int startY,int endY){
+    public synchronized void cleanArea(int startX,int endX,int startY,int endY){
 
         System.out.println("StartX : "+startX+", EndX : "+endX);
         System.out.println("StartY : "+startY+", EndY : "+endY);
@@ -88,10 +89,11 @@ public class Sweep {
 
     }
 
-    public void charge() {
+    public synchronized void charge() {
         System.out.println("Returning to Charging station..");
         this.setLocation(0,9);
         System.out.println("Charging...");
+        System.out.println("DIRT: "+dirtSensor.Capacity);
         battery.charge();
         dirtSensor.emptyBag();
     }

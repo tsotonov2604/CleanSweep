@@ -2,6 +2,7 @@ package GUI;
 
 
 import move.Grid;
+import move.Simulation;
 import move.Sweep;
 import schedule.Schedule;
 
@@ -11,6 +12,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 public class SweepMainPage extends JFrame{
@@ -18,8 +21,9 @@ public class SweepMainPage extends JFrame{
 
     private static Sweep sweep;
     private static Grid grid;
+    private static int cleanedAreas = 4;
 
-
+    private Simulation simulation;
     private GroupLayout jPanel1Layout;
     private ButtonGroup buttonGroup1;
     private JButton cleanBtn;
@@ -30,7 +34,9 @@ public class SweepMainPage extends JFrame{
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JLabel jLabel3;
+    private JLabel jLabel4;
     private JLabel batteryPercentage;
+    private JLabel dirtTxt;
     private JScrollPane jScrollPane1;
     private JSeparator jSeparator1;
     private JSeparator jSeparator2;
@@ -42,6 +48,7 @@ public class SweepMainPage extends JFrame{
 
     private SweepMainPage() {
         initComponents();
+        simulation = Simulation.createInstance();
     }
 
 
@@ -65,7 +72,8 @@ public class SweepMainPage extends JFrame{
         registerBtn = new JButton();
         jLabel3 = new JLabel();
         batteryPercentage = new JLabel();
-
+        jLabel4 = new javax.swing.JLabel();
+        dirtTxt = new javax.swing.JLabel();
 
         cleaningConsole.setEditable(false);
         cleaningConsole.setColumns(20);
@@ -111,6 +119,10 @@ public class SweepMainPage extends JFrame{
                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                        .addComponent(jLabel3)
                        .addComponent(batteryPercentage))
+               .addGap(18, 18, 18)
+               .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                       .addComponent(jLabel4)
+                       .addComponent(dirtTxt))
                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                .addComponent(scheduleBtn)
                .addGap(18, 18, 18)
@@ -154,6 +166,8 @@ public class SweepMainPage extends JFrame{
 
         jLabel3.setVisible(false);
         batteryPercentage.setVisible(false);
+        dirtTxt.setVisible(false);
+        jLabel4.setVisible(false);
 
     }
 
@@ -179,9 +193,13 @@ public class SweepMainPage extends JFrame{
                                         .addComponent(logoutBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(registerBtn, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(batteryPercentage)))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel3)
+                                                        .addComponent(jLabel4))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(dirtTxt)
+                                                        .addComponent(batteryPercentage))))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jSeparator2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -190,6 +208,8 @@ public class SweepMainPage extends JFrame{
                                         .addComponent(floorSelectBtn))
                                 .addGap(58, 58, 58))
         );
+
+
     }
 
 
@@ -204,6 +224,9 @@ public class SweepMainPage extends JFrame{
         scheduleBtn.setText("Schedule");
         logoutBtn.setText("Logout");
         registerBtn.setText("Register Sweep");
+        jLabel4.setText("Dirt Bag:");
+        dirtTxt.setText("0");
+
 
 
         registerBtn.addActionListener(evt -> registerBtnActionPerformed(evt));
@@ -212,7 +235,7 @@ public class SweepMainPage extends JFrame{
         logoutBtn.addActionListener(evt -> logoutBtnActionPerformed(evt));
         onBtn.addActionListener(evt -> onBtnActionPerformed(evt));
         offBtn.addActionListener(evt -> offBtnActionPerformed(evt));
-
+        cleanBtn.addActionListener(evt -> cleanBtnActionPerformed(evt));
 
 
     }
@@ -246,13 +269,15 @@ public class SweepMainPage extends JFrame{
 
     private void registerBtnActionPerformed(ActionEvent evt) {
         if (sweep == null) {
-            sweep = new Sweep();
+            sweep = new Sweep(0,9,simulation.getGrid());
             JOptionPane.showMessageDialog(this,sweep.getSerialNumber(),"Serial Number Registered",JOptionPane.INFORMATION_MESSAGE);
             cleaningConsole.append("\n"+sweep.getSerialNumber());
             offBtn.setSelected(true);
-            jLabel3.setVisible(true);
-            batteryPercentage.setVisible(true);
+//            jLabel3.setVisible(true);
+//            batteryPercentage.setVisible(true);
             cleanBtn.setVisible(true);
+//            jLabel4.setVisible(false);
+//            dirtTxt.setVisible(false;
         }
         else{
             JOptionPane.showMessageDialog(this,sweep.getSerialNumber()+" : "+"Already registered!","ERROR!",JOptionPane.ERROR_MESSAGE);
@@ -328,6 +353,65 @@ public class SweepMainPage extends JFrame{
     }
 
 
+    private void cleanBtnActionPerformed(ActionEvent evt) {
+
+        onBtn.setSelected(true);
+        simulation.addSweep(sweep);
+        String s = simulation.startSimulation();
+        cleaningConsole.append(s);
+        cleanNext();
+        //delayMovement();
+
+    }
+
+    private void delayMovement(){
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                delay();
+            }
+        };
+        Timer timer = new Timer("Returning");
+        timer.schedule(timerTask,3000L);
+    }
+    private void delay() {
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                sweep.charge();
+                cleanNext();
+
+            }
+        };
+
+        Timer timer = new Timer("Charging");
+        timer.schedule(timerTask,5000L);
+
+
+    }
+
+    private synchronized void cleanNext() {
+        if(cleanedAreas > 0) {
+            String s ="";
+            switch (cleanedAreas){
+                case 4: s=simulation.cleanAreaOne(); break;
+                case 3: s=simulation.cleanAreaTwo(); break;
+                case 2: s=simulation.cleanAreaThree(); break;
+                case 1: s=simulation.cleanAreaFour();break;
+            }
+            cleanedAreas--;
+            cleaningConsole.append("\n");
+            cleaningConsole.append(s);
+            cleaningConsole.append("returning to charging station...");
+            cleaningConsole.append("\n Battery is "+sweep.getBattery().getBatteryPercentage());
+            cleaningConsole.append("\n Bag has "+sweep.dirtSensor.Capacity);
+            cleaningConsole.append("\ncharging and emptying bag...");
+            System.out.println(cleanedAreas+" : Areas");
+            delayMovement();
+
+        }
+    }
 
 
 }

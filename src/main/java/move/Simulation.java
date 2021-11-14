@@ -6,8 +6,8 @@ public class Simulation {
 
     public static final HashMap<String,Grid> floor = new HashMap<>();
     private static Simulation simulation;
-    public final Grid FULL_GRID;
-
+    private final Grid FULL_GRID;
+    private Sweep sweep;
 
     private Simulation(){
         FULL_GRID =  new Grid(10);
@@ -53,43 +53,46 @@ public class Simulation {
 
     }
 
-    public  void startSimulation(){
+    public  String startSimulation(){
         FULL_GRID.configureSubGrids(0,3,0,4,2);
         FULL_GRID.configureSubGrids(5,10,0,4,2);
         FULL_GRID.configureSubGrids(5,9,7,9,3);
-        FULL_GRID.printClean();
-        Sweep sweep = new Sweep(0,9,FULL_GRID);
-        sweep.cleanArea(0,3,5,9);
-        FULL_GRID.printClean();
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append("\n"+FULL_GRID.printClean());
+        //Sweep sweep = new Sweep(0,9,FULL_GRID);
+//        sweep.cleanArea(0,3,5,9);
+//        stringBuilder.append(FULL_GRID.printClean());
         System.out.println(sweep.getBattery().getBatteryPercentage()+"");
         System.out.println(sweep.dirtSensor.Capacity+"");
-        sweep.charge();
-        sweep.cleanArea(4,5,2,9);
-        sweep.cleanArea(0,3,4,4);
-        sweep.cleanArea(0,3,0,2);
-        sweep.cleanArea(0,1,3,3);
-        sweep.cleanArea(2,3,3,3);
-        FULL_GRID.printClean();
-        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
-        System.out.println(sweep.dirtSensor.Capacity+"");
-        sweep.charge();
-        sweep.cleanArea(6,7,1,2);
-        FULL_GRID.printClean();
-        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
-        System.out.println(sweep.dirtSensor.Capacity+"");
-        sweep.cleanArea(6,9,3,9);
-        FULL_GRID.printClean();
-        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
-        System.out.println(sweep.dirtSensor.Capacity+"");
-        sweep.cleanArea(4,7,0,0);
-        FULL_GRID.printClean();
-        sweep.cleanArea(8,9,0,2);
-        FULL_GRID.printClean();
-        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
-        System.out.println(sweep.dirtSensor.Capacity+"");
-        sweep.cleanArea(4,5,1,1);
-        FULL_GRID.printClean();
-        sweep.charge();
+//        sweep.charge();
+//        sweep.cleanArea(4,5,2,9);
+//        sweep.cleanArea(0,3,4,4);
+//        sweep.cleanArea(0,3,0,2);
+//        sweep.cleanArea(0,1,3,3);
+//        sweep.cleanArea(2,3,3,3);
+//        stringBuilder.append(FULL_GRID.printClean());
+//        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
+//        System.out.println(sweep.dirtSensor.Capacity+"");
+//        sweep.charge();
+//        sweep.cleanArea(6,7,1,2);
+//        stringBuilder.append(FULL_GRID.printClean());
+//        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
+//        System.out.println(sweep.dirtSensor.Capacity+"");
+//        sweep.cleanArea(6,9,3,9);
+//        stringBuilder.append(FULL_GRID.printClean());
+//        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
+//        System.out.println(sweep.dirtSensor.Capacity+"");
+//        sweep.cleanArea(4,7,0,0);
+//        stringBuilder.append(FULL_GRID.printClean());
+//        sweep.cleanArea(8,9,0,2);
+//        stringBuilder.append(FULL_GRID.printClean());
+//        System.out.println(sweep.getBattery().getBatteryPercentage()+"");
+//        System.out.println(sweep.dirtSensor.Capacity+"");
+//        sweep.cleanArea(4,5,1,1);
+//        stringBuilder.append(FULL_GRID.printClean());
+//        sweep.charge();
+
+        return stringBuilder.toString();
 
     }
 
@@ -106,5 +109,53 @@ public class Simulation {
         return g;
     }
 
+    public void addSweep(Sweep sweep){
+        this.sweep = sweep;
+    }
+
+    public Grid getGrid(){
+        return FULL_GRID;
+    }
+
+    public String cleanAreaOne(){
+        System.out.println("AreaOne");
+        StringBuilder stringBuilder = new StringBuilder("");
+        sweep.cleanArea(0,3,5,9);
+        stringBuilder.append(FULL_GRID.printClean());
+        return stringBuilder.toString();
+    }
+
+    public String cleanAreaTwo(){
+        System.out.println("AreaTwo");
+        StringBuilder stringBuilder = new StringBuilder("");
+        sweep.cleanArea(4,5,2,9);
+        sweep.cleanArea(0,3,4,4);
+        sweep.cleanArea(0,3,0,2);
+        sweep.cleanArea(0,1,3,3);
+        sweep.cleanArea(2,3,3,3);
+        sweep.cleanArea(6,7,1,2);
+        sweep.cleanArea(8,9,0,2);
+        stringBuilder.append("\n"+FULL_GRID.printClean());
+        return stringBuilder.toString();
+    }
+
+    public String cleanAreaThree(){
+        System.out.println("AreaThree");
+        StringBuilder stringBuilder = new StringBuilder("");
+        sweep.cleanArea(6,9,3,9);
+        sweep.cleanArea(6,9,9,9);
+        sweep.cleanArea(4,7,0,0);
+        stringBuilder.append("\n"+FULL_GRID.printClean());
+        return stringBuilder.toString();
+    }
+
+    public String cleanAreaFour(){
+        System.out.println("AreaFour");
+        StringBuilder stringBuilder = new StringBuilder("");
+        sweep.cleanArea(8,9,0,2);
+        sweep.cleanArea(4,5,1,1);
+        stringBuilder.append("\n"+FULL_GRID.printClean());
+        return stringBuilder.toString()+" \n --FLOOR FULLY CLEANED-- \n";
+    }
 
 }

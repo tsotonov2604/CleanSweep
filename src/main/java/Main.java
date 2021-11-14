@@ -20,8 +20,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
     //   Simulation.createFloor();
-        Simulation sim = Simulation.createInstance();
-        sim.startSimulation();
+//        Simulation sim = Simulation.createInstance();
+//        sim.startSimulation();
 
 //     Grid grid = new Grid(4,4);
 //     grid.printGrid();
@@ -144,10 +144,7 @@ public class Main {
 //        });
 //
 //        //GUI
-//        JFrame loginScreenFrame = new JFrame("Login");
-//        User user = new User();
-//        LoginScreen gui = new LoginScreen(loginScreenFrame, sweepObj,user );
-//        gui.createLoginScreen();
+
 //
 //        //Battery
 //        Battery lowWar= new Battery();
@@ -157,6 +154,10 @@ public class Main {
 
         // SweepMain Layout
         //SweepMainPage.createPage();
+        JFrame loginScreenFrame = new JFrame("Login");
+        User user = new User();
+        LoginScreen gui = new LoginScreen(loginScreenFrame, null,user );
+        gui.createLoginScreen();
 
 
 

@@ -202,19 +202,20 @@ public class Grid {
         return strBldr.toString();
     }
 
-    public void printClean(){
+    public String printClean() {
         Tile temp = gridHead;
         Tile currentRow = gridHead;
-
-        while(currentRow != null) {
+        StringBuilder strBldr = new StringBuilder("");
+        while (currentRow != null) {
             while (temp != null) {
-                System.out.print(temp.getDirt());
+                strBldr.append(temp.getDirt());
                 temp = temp.getRight();
             }
-            System.out.println();
+            strBldr.append("\n");
             temp = currentRow.getDown();
             currentRow = temp;
         }
+        return strBldr.toString();
     }
 
 
