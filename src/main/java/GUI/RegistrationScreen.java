@@ -1,8 +1,10 @@
-package GUI;
+package gui;
 import javax.swing.*;
+
+import gui.User;
+
 import java.awt.event.*;
 import move.*;
-import GUI.User;
 
 public class RegistrationScreen {
 

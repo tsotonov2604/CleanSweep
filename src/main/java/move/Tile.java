@@ -1,12 +1,13 @@
 package move;
 
 
-import Barriers.Barrier;
-import Barriers.Door;
-import ChargingStation.Edge;
-import ChargingStation.Vertex;
+import charging_station.Edge;
+import charging_station.Vertex;
 
 import java.util.ArrayList;
+
+import barriers.Barrier;
+import barriers.Door;
 
 public class Tile implements IMoveHelper, Comparable<Tile> {
 

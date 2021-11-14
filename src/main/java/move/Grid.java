@@ -1,12 +1,13 @@
 package move;
 
-import Barriers.FloorType;
-import ChargingStation.Edge;
-import ChargingStation.Vertex;
 import battery.Battery;
-import Log.Logger;
+import charging_station.Edge;
+import charging_station.Vertex;
+import log.Logger;
 
 import java.util.ArrayList;
+
+import barriers.FloorType;
 
 public class Grid {
 

@@ -1,4 +1,4 @@
-package Barriers;
+package barriers;
 
 public class Floor implements Environment {
     private FloorType floorType;

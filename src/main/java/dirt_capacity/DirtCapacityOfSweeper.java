@@ -1,6 +1,7 @@
-package DirtCapacity;
+package dirt_capacity;
 import java.util.LinkedList;
-import Log.Logger;
+
+import log.Logger;
 
 public class DirtCapacityOfSweeper{
 

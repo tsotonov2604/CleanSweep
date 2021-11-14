@@ -1,4 +1,4 @@
-package Barriers;
+package barriers;
 
 public class Door implements Barrier {
     private boolean isOpen;

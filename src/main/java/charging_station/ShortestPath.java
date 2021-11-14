@@ -1,4 +1,4 @@
-package ChargingStation;
+package charging_station;
 import java.util.PriorityQueue;
 import java.util.List;
 import java.util.ArrayList;

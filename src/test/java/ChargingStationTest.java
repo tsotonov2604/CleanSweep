@@ -1,7 +1,8 @@
 import java.awt.Point;
 import battery.Battery;
+import charging_station.ChargingStation;
+
 import org.junit.jupiter.api.Test;
-import ChargingStation.ChargingStation;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

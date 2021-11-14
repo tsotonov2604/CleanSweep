@@ -1,4 +1,4 @@
-package Barriers;
+package barriers;
 
 public class Wall implements Barrier {
 

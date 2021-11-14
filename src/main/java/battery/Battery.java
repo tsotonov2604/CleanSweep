@@ -1,6 +1,7 @@
 package battery;
 import javax.swing.*;
-import Barriers.FloorType;
+
+import barriers.FloorType;
 
 public class Battery {
 

@@ -1,4 +1,4 @@
-package DirtCapacity;
+package dirt_capacity;
 import javax.swing.*;
 
 

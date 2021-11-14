@@ -1,8 +1,8 @@
 package move;
 
-import DirtCapacity.DirtSensor;
 import battery.Battery;
-import DirtCapacity.DirtCapacityOfSweeper;
+import dirt_capacity.DirtCapacityOfSweeper;
+import dirt_capacity.DirtSensor;
 
 import java.util.UUID;
 

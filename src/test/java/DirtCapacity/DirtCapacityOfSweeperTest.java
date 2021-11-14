@@ -1,9 +1,9 @@
 package DirtCapacity;
-import DirtCapacity.DirtCapacityOfSweeper;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import dirt_capacity.DirtCapacityOfSweeper;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,17 +1,16 @@
-import Barriers.Floor;
-import ChargingStation.*;
 import move.*;
+import power.OnOffButton;
 import schedule.Schedule;
-import ChargingStation.ChargingStation;
-import Power.OnOffButton;
+import barriers.Floor;
 import battery.*;
-import ChargingStation.*;
+import charging_station.*;
+import dirt_capacity.*;
+import gui.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import DirtCapacity.*;
-import GUI.*;
 
 
 

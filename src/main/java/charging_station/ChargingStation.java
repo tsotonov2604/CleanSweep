@@ -1,4 +1,4 @@
-package ChargingStation;
+package charging_station;
 import move.Grid;
 import battery.Battery;
 import java.awt.Point;

@@ -1,4 +1,4 @@
-package Barriers;
+package barriers;
 
 public interface Environment {
     boolean isBlocking();

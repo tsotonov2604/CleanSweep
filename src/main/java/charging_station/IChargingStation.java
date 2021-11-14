@@ -1,4 +1,4 @@
-package ChargingStation;
+package charging_station;
 
 public interface IChargingStation {
 
