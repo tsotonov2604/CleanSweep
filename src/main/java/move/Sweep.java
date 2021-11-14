@@ -1,5 +1,6 @@
 package move;
 
+import DirtCapacity.DirtSensor;
 import battery.Battery;
 import DirtCapacity.DirtCapacityOfSweeper;
 
@@ -11,12 +12,15 @@ public class Sweep {
     Grid pGrid;
     int x,y;
     Tile tile;
+    public DirtSensor dirtSensor;
 
     public Sweep(int x,int y, Grid grid) {
         this.battery = new Battery();
         this.pGrid = grid;
         this.x = x;
         this.y = y;
+        this.dirtSensor = new DirtSensor();
+        serialNumber = UUID.randomUUID().toString();
         //this.tile = pGrid.getSpecificTile(x,y);
         //this.tile.parentGrid = pGrid;
     }
@@ -27,6 +31,7 @@ public class Sweep {
 
     public void clean(Tile tile){
         this.battery.decreaseBattery(tile.getDirt());
+        this.dirtSensor.addToCapacity(tile.getDirt());
         tile.setDirt(0);
         DirtCapacityOfSweeper.dirtCapacity();
     }
@@ -67,5 +72,40 @@ public class Sweep {
     public String getSerialNumber() {
         return serialNumber;
     }
+
+    public synchronized void cleanArea(int startX,int endX,int startY,int endY){
+
+        System.out.println("StartX : "+startX+", EndX : "+endX);
+        System.out.println("StartY : "+startY+", EndY : "+endY);
+        Tile startTile = pGrid.getSpecificTile(startY,startX);
+
+        for(int i=startY;i<=endY;i++) {
+            if(battery.getBatteryPercentage() > 20.0) {
+                cleanRow(startTile, startX, endX);
+                startTile = startTile.getDown();
+            }
+            else {
+                charge();
+            }
+        }
+
+    }
+
+    public synchronized void charge() {
+        System.out.println("Returning to Charging station..");
+        this.setLocation(0,9);
+        System.out.println("Charging...");
+        System.out.println("DIRT: "+dirtSensor.Capacity);
+        battery.charge();
+        dirtSensor.emptyBag();
+    }
+
+    private void cleanRow(Tile startTile,int startX, int endX) {
+        for(int i=startX;i<=endX;i++){
+            clean(startTile);
+            startTile=startTile.getRight();
+        }
+    }
+
 
 }

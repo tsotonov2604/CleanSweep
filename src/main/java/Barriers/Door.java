@@ -18,4 +18,11 @@ public class Door implements Barrier {
     public boolean isBlocking() {
         return !isOpen;
     }
+
+    @Override
+    public String toString() {
+        return "Door{" +
+                "isOpen=" + isOpen +
+                '}';
+    }
 }
